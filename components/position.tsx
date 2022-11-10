@@ -8,7 +8,7 @@ interface PositionProps {
 const Position: React.FC<PositionProps> = ({ driver }) => {
   const lineColorStyle = {
     backgroundImage:
-      'linear-gradient(90deg, rgba(255, 255, 255, 0),' +
+      'linear-gradient(90deg, rgba(255, 255, 255, 0) 10%,' +
       TeamsColors.get(driver.team.id) +
       ')',
   };
@@ -25,34 +25,19 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
     <>
       <div className='flex w-full h-full items-center justify-center'>
         <div
-          className={`flex justify-between items-center w-[1200px] rounded-bl-[550px] rounded-tr-[999px] -z-20`}
+          className={`flex  justify-between items-center w-[1280px] rounded-bl-[550px] rounded-tr-[999px] -z-20`}
           style={lineColorStyle}
         >
-          {/* <div className='flex'>
-            <div
-              className='flex justify-center items-center w-16 h-16 rounded-full rounded-tl-none  outline outline-[#060616] outline-3'
-              style={pointsColorStyle}
-            >
-              <span className='text-black text-2xl'>{driver.points}</span>
-            </div>
-            <div
-              className='flex -ml-6 -z-10 mr-4 rounded-r-full items-center justify-center h-16 text-5xl'
-              style={pointsColorStyle}
-            >
-              <span className='mr-6 ml-9 text-white font-b'>
-                {driver.position}
-              </span>
-            </div> */}
           <div className='flex'>
             <div
-              className='flex  rounded-r-[999px] rounded-bl-[200px]'
+              className='flex w-32 mr-4 justify-between rounded-r-[999px] rounded-bl-[800px]'
               style={pointsColorStyle}
             >
               <div className='flex justify-center items-center w-16 h-16 rounded-full rounded-tl-none  outline outline-[#060616] outline-3'>
                 <span className='text-black text-2xl'>{driver.points}</span>
               </div>
-              <div className='flex mr-4 rounded-r-full items-center justify-center h-16 text-5xl'>
-                <span className='mr-6 ml-9 text-white font-b'>
+              <div className='flex mr-3 w-14 rounded-r-full items-center justify-center h-16 text-4xl'>
+                <span className='mx-auto text-black font-b'>
                   {driver.position}
                 </span>
               </div>
@@ -65,7 +50,9 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
                 width='62'
                 height='60'
               />
-              <span className='text-4xl'>{driver.driver.name}</span>
+              <span className='text-4xl font-semibold'>
+                {driver.driver.name}
+              </span>
             </div>
           </div>
           <div className='flex items-center'>
