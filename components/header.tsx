@@ -1,10 +1,14 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
+  const { query } = useRouter();
   return (
     <>
       <div className='flex justify-center mb-24'>
-        <div className='flex items-center w-[1200px]'>
+        <div className='flex items-center w-[1280px]'>
           <svg
             width='370'
             height='60'
@@ -19,9 +23,11 @@ const Header: React.FC<HeaderProps> = () => {
           </svg>
           <div className='w-full h-[3px] mx-4 rounded-full bg-[#EC1C24]'></div>
           <nav className='justify-self-end flex justify-between space-x-3 text-xl'>
-            <span>STANDING</span>
-            <span>DRIVERS</span>
-            <span>TEAMS</span>
+            <Link className='text-[#F8D31E]' href={'/'}>
+              STANDING
+            </Link>
+            <Link href={'/drivers'}>DRIVERS</Link>
+            <Link href={'/teams'}>TEAMS</Link>
           </nav>
         </div>
       </div>
