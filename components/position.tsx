@@ -23,21 +23,26 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
 
   return (
     <>
-      <div className='flex w-full h-full items-center justify-center'>
+      <div className='flex text-[#F2F2F2] w-full h-full items-center justify-center'>
         <div
-          className={`flex  justify-between items-center w-[1280px] rounded-bl-[550px] rounded-tr-[999px] -z-20`}
+          className={`flex justify-between items-center w-full rounded-bl-[550px] rounded-tr-[999px] -z-20`}
           style={lineColorStyle}
         >
           <div className='flex'>
             <div
-              className='flex w-32 mr-4 justify-between rounded-r-[999px] rounded-bl-[800px]'
+              className='flex w-36 mr-4 justify-between rounded-r-[999px] rounded-bl-[800px]'
               style={pointsColorStyle}
             >
-              <div className='flex justify-center items-center w-16 h-16 rounded-full rounded-tl-none  outline outline-[#060616] outline-3'>
-                <span className='text-black text-2xl'>{driver.points}</span>
+              <div className='flex flex-col text-black  w-16 h-16 rounded-full rounded-tl-none  outline outline-[#060616] outline-3'>
+                <span className='absolute z-10 px-[0.12rem] text-xs font-bold'>
+                  PTS
+                </span>
+                <span className='m-auto text-2xl font-semibold'>
+                  {driver.points}
+                </span>
               </div>
-              <div className='flex mr-3 w-14 rounded-r-full items-center justify-center h-16 text-4xl'>
-                <span className='mx-auto text-black font-b'>
+              <div className='flex mx-auto rounded-r-full items-center justify-center h-16 text-4xl'>
+                <span className='mx-auto pt-1 text-black text-5xl font-bold'>
                   {driver.position}
                 </span>
               </div>
