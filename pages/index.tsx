@@ -2,26 +2,11 @@ import Standings from '../components/standings';
 import { GetServerSideProps } from 'next';
 import { IRankingDriver, IRespond } from '../pages/api/formulaModels';
 import Header from '../components/header';
+import { getRankingBySeason } from './api/formulaRequests';
 
 export const getServerSideProps: GetServerSideProps = async () => {
   let loading = true;
-  var myHeaders = new Headers();
-
-  myHeaders.append('x-rapidapi-key', process.env.RAPIDAPI_KEY);
-  myHeaders.append('x-rapidapi-host', 'v1.formula-1.api-sports.io');
-
-  const requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow',
-  };
-  const curYear = new Date().getFullYear();
-  const res = await fetch(
-    `https://v1.formula-1.api-sports.io/rankings/drivers?season=${curYear}`,
-    requestOptions as RequestInit
-  );
-  const resp: IRespond = await res.json();
-  const drivers: IRankingDriver[] = resp.response;
+  const drivers = await getRankingBySeason();
   loading = false;
   return {
     props: { drivers, loading }, // will be passed to the page component as props
@@ -29,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Home = ({
-  drivers = [],
+  drivers,
   loading,
 }: {
   drivers: IRankingDriver[];
