@@ -1,13 +1,15 @@
 import Standings from '../components/standings';
-
 import { GetServerSideProps } from 'next';
 import { IRankingDriver, IRespond } from '../pages/api/formulaModels';
 import Header from '../components/header';
+// import * as dotenv from 'dotenv';
+// dotenv.config();
 
 export const getServerSideProps: GetServerSideProps = async () => {
   let loading = true;
   var myHeaders = new Headers();
-  myHeaders.append('x-rapidapi-key', 'd1a9d48ff31e900c4474e5ad83831035');
+
+  myHeaders.append('x-rapidapi-key', process.env.RAPIDAPI_KEY);
   myHeaders.append('x-rapidapi-host', 'v1.formula-1.api-sports.io');
 
   const requestOptions = {

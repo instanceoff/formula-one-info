@@ -5,6 +5,7 @@ specifiers:
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.8
   autoprefixer: ^10.4.13
+  dotenv: ^16.0.3
   eslint: 8.27.0
   eslint-config-next: 13.0.2
   next: 13.0.2
@@ -18,6 +19,7 @@ dependencies:
   '@types/node': 18.11.9
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.8
+  dotenv: 16.0.3
   eslint: 8.27.0
   eslint-config-next: 13.0.2_rmayb2veg2btbq6mbmnyivgasy
   next: 13.0.2_biqbaboplfbrettd7655fr4n2y
@@ -683,6 +685,11 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
+    dev: false
+
+  /dotenv/16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
     dev: false
 
   /electron-to-chromium/1.4.284:
