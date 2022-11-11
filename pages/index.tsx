@@ -2,8 +2,6 @@ import Standings from '../components/standings';
 import { GetServerSideProps } from 'next';
 import { IRankingDriver, IRespond } from '../pages/api/formulaModels';
 import Header from '../components/header';
-// import * as dotenv from 'dotenv';
-// dotenv.config();
 
 export const getServerSideProps: GetServerSideProps = async () => {
   let loading = true;
@@ -17,9 +15,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
     headers: myHeaders,
     redirect: 'follow',
   };
-
+  const curYear = new Date().getFullYear();
   const res = await fetch(
-    'https://v1.formula-1.api-sports.io/rankings/drivers?season=2022',
+    `https://v1.formula-1.api-sports.io/rankings/drivers?season=${curYear}`,
     requestOptions as RequestInit
   );
   const resp: IRespond = await res.json();
