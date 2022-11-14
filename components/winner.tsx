@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { CSSProperties } from 'react';
 import { IRaceDriver, IRace, TeamsColors } from '../pages/api/formulaModels';
 
 interface LastWinnerProps {
@@ -7,20 +8,18 @@ interface LastWinnerProps {
 }
 
 const LastWinner: React.FC<LastWinnerProps> = ({ driver, race }) => {
-  const background = {
-    backgroundImage: `url(${race.circuit.image})`,
-  };
   const backStyle = {
     opacity: 1,
     backgroundImage:
       'repeating-linear-gradient( 45deg, rgba(255,255,255, 0.1), rgba(255,255,255, 0.1) 2px, transparent 2px, transparent 6px )',
     borderImage:
-      'repeating-linear-gradient( 45deg, rgba(255,255,255, 0.4), rgba(255,255,255, 0.4) 2px, transparent 2px, transparent 6px ) 8 round ',
+      'repeating-linear-gradient( 45deg, rgba(255,255,255, 0.4), rgba(255,255,255, 0.4) 2px, transparent 2px, transparent 6px ) 8 repeat ',
   };
-  const backStyle2 = {
-    backgroundImage:
-      'linear-gradient(180deg, rgba(255, 255, 255, 0) 10%,  rgba(255, 255, 255, 1))',
+
+  const backStyle2: CSSProperties = {
+    backgroundImage: 'url("/images/brazil.svg")',
   };
+
   const teamColor = {
     color: TeamsColors.get(driver.team.id),
   };
@@ -33,34 +32,36 @@ const LastWinner: React.FC<LastWinnerProps> = ({ driver, race }) => {
             className='flex w-full items-center justify-center rounded-2xl p-2 border-8'
             style={backStyle}
           >
-            <span className='absolute self-center justify-self-center text-8xl font-bold text-[#F8D31E]'>
-              WINNER
-            </span>
-            <div className='flex flex-row rounded-2xl justify-between w-full bg-center bg-no-repeat'>
-              <div className='flex flex-col justify-between'>
-                <div className='flex items-center'>
-                  <span className='text-5xl font-semibold border-4 rounded-2xl p-3 mr-2'>
-                    {race.competition.name}
-                  </span>
-                </div>
-
-                <span className='text-6xl font-semibold'>
-                  {driver.driver.name.split(' ')[0]}
-                  <br />
-                  <span className='text-8xl' style={teamColor}>
-                    {driver.driver.name.split(' ')[1]}
-                  </span>
-                </span>
-              </div>
-              <div>
+            <div className='flex flex-row items-center rounded-2xl w-full bg-center bg-no-repeat bg-contain bg-opacity-20'>
+              <div className='flex w-fit flex-col justify-end'>
                 <Image
+                  className=''
                   src={
                     'https://www.f1fantasytracker.com/Images//Drivers/2021/RussellFull.png'
                   }
                   alt={''}
                   width={270}
-                  height={270}
+                  height={385}
                 />
+                <span className='absolute text-5xl justify-self-end p-2 bg-[#060616] bg-opacity-80 rounded-2xl'>
+                  {driver.driver.name.split(' ')[0]}
+                  <br />
+                  <span className='text-7xl font-semibold' style={teamColor}>
+                    {driver.driver.name.split(' ')[1]}
+                  </span>
+                </span>
+              </div>
+
+              <div
+                className='flex w-full h-full items-center justify-center bg-contain bg-no-repeat bg-center'
+                style={backStyle2}
+              >
+                <span className='flex flex-col items-center font-bold text-[#F8D31E] '>
+                  <span className='flex text-6xl font-semibold border-4 rounded-2xl p-3 text-white bg-[#060616]'>
+                    {race.competition.name}
+                  </span>
+                  <span className='text-9xl'>WINNER</span>
+                </span>
               </div>
             </div>
           </div>

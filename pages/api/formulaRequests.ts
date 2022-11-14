@@ -37,7 +37,9 @@ export const getLastRace = async () => {
 };
 
 export const getLastWinner = async () => {
-  const lastRaceID = (await getLastRace()).id;
+  const lastRace = await getLastRace();
+
+  const lastRaceID = lastRace.id;
 
   const res = await fetch(
     `https://v1.formula-1.api-sports.io/rankings/races?race=${lastRaceID}`,

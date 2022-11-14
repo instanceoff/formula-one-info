@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { CSSProperties } from 'react';
 import { IRankingDriver, TeamsColors } from '../pages/api/formulaModels';
 
 interface PositionProps {
@@ -6,7 +7,7 @@ interface PositionProps {
 }
 
 const Position: React.FC<PositionProps> = ({ driver }) => {
-  const lineColorStyle = {
+  const lineColorStyle: CSSProperties = {
     backgroundImage:
       'linear-gradient(90deg, rgba(255, 255, 255, 0) 10%,' +
       TeamsColors.get(driver.team.id) +
@@ -37,7 +38,7 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
         >
           <div
             style={lineColorStyle}
-            className={`flex justify-between items-center w-full rounded-bl-[550px] rounded-tr-[999px] -z-20`}
+            className={`flex testik justify-between items-center w-full rounded-bl-[550px] rounded-tr-[999px] -z-20`}
           >
             <div className='flex'>
               <div
