@@ -38,3 +38,8 @@ a {
     background: #060616;
   }
 }
+
+.text-stroke-2 {
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #060616;
+}
