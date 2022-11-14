@@ -7,7 +7,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'media.api-sports.io',
-        port: '*',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.f1fantasytracker.com',
         pathname: '/**',
       },
     ],

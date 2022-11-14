@@ -7,7 +7,7 @@ const Header: React.FC<HeaderProps> = () => {
   const { query } = useRouter();
   return (
     <>
-      <div className='flex justify-center mb-24 mt-2'>
+      <div className='flex justify-center mt-2'>
         <div className='flex items-center max-w-7xl w-full'>
           <svg
             width='370'

@@ -27,20 +27,6 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
     backgroundImage:
       'repeating-linear-gradient( 45deg, rgba(255,255,255, 0.1), rgba(255,255,255, 0.1) 2px, transparent 2px, transparent 6px )',
   };
-  const backStyle2 = {
-    opacity: 1,
-    backgroundImage:
-      'repeating-linear-gradient( 45deg, rgba(255,255,255, 0.1), rgba(255,255,255, 0.1) 2px, white 2px, white 6px )',
-  };
-
-  const test1 = {
-    textShadow:
-      '2px 0 0 #060616, -2px 0 0 #060616, 0 2px 0 #060616, 0 -2px 0 #060616, 1px 1px #060616, -1px -1px 0 #060616, 1px -1px 0 #060616, -1px 1px 0 #060616',
-  };
-  const test = {
-    textShadow:
-      '3px 0 0 #060616, -3px 0 0 #060616, 0 3px 0 #060616, 0 -3px 0 #060616, 2px 2px #060616, -2px -2px 0 #060616, 2px -2px 0 #060616, -2px 2px 0 #060616',
-  };
 
   return (
     <>

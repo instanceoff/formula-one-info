@@ -14,6 +14,53 @@ export interface ITeam {
   logo: string;
 }
 
+export interface IRaceDriver {
+  race: { id: number };
+  driver: IDriver;
+  team: ITeam;
+  position: number;
+  time: string;
+  laps: number;
+  grid: string;
+  pits: number;
+  gap?: number;
+}
+export interface IRace {
+  id: number;
+  competition: ICompetition;
+  circuit: ICircuit;
+  season: number;
+  type: string;
+  laps: ILaps;
+  fastest_lap: IFastestLap;
+  distance: string;
+  timezone: string;
+  date: string;
+  weather: string;
+  status: string;
+}
+export interface IFastestLap {
+  driver?: IDriver;
+  time?: string;
+}
+export interface ILaps {
+  current?: number;
+  total: number;
+}
+export interface ICompetition {
+  id: number;
+  name: string;
+  location: string;
+}
+export interface ILocation {
+  country: string;
+  city: string;
+}
+export interface ICircuit {
+  id: number;
+  name: string;
+  image: string;
+}
 export interface IDriver {
   id: number;
   name: string;
@@ -22,11 +69,11 @@ export interface IDriver {
   image: string;
 }
 
-export interface IRespond {
+export interface IRespond<ResponseType> {
   errors: any[];
   get: 'rankings';
   parameters: Object;
-  response: IRankingDriver[];
+  response: ResponseType[];
   results: number;
 }
 

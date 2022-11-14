@@ -1,4 +1,4 @@
-import { IRankingDriver, IRespond } from './formulaModels';
+import { IRankingDriver, IRespond, IRace, IRaceDriver } from './formulaModels';
 
 var myHeaders = new Headers();
 
@@ -19,8 +19,33 @@ export const getRankingBySeason = async (year?: string) => {
     requestOptions as RequestInit
   );
 
-  const resp: IRespond = await res.json();
+  const resp: IRespond<IRankingDriver> = await res.json();
   const drivers: IRankingDriver[] = resp.response;
 
   return drivers;
+};
+
+export const getLastRace = async () => {
+  const res = await fetch(
+    `https://v1.formula-1.api-sports.io/races?last=1&type=race`,
+    requestOptions as RequestInit
+  );
+
+  const resp: IRespond<IRace> = await res.json();
+  const race: IRace = resp.response[0];
+  return race;
+};
+
+export const getLastWinner = async () => {
+  const lastRaceID = (await getLastRace()).id;
+
+  const res = await fetch(
+    `https://v1.formula-1.api-sports.io/rankings/races?race=${lastRaceID}`,
+    requestOptions as RequestInit
+  );
+
+  const resp: IRespond<IRaceDriver> = await res.json();
+  const driver: IRaceDriver = resp.response[0];
+
+  return driver;
 };
