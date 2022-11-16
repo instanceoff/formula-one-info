@@ -36,9 +36,9 @@ const LastWinner: React.FC<LastWinnerProps> = ({ driver, race }) => {
               <div className='flex w-fit flex-col justify-end'>
                 <Image
                   className=''
-                  src={
-                    'https://www.f1fantasytracker.com/Images//Drivers/2021/RussellFull.png'
-                  }
+                  src={`https://www.f1fantasytracker.com/Images//Drivers/2021/${
+                    driver.driver.name.split(' ')[1]
+                  }Full.png`}
                   alt={''}
                   width={350}
                   height={385}

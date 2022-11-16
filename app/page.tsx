@@ -8,16 +8,14 @@ import {
 } from '../api/formulaRequests';
 
 const Page = async () => {
-  let loading = true;
   const drivers = await getRankingBySeason();
   const winner = await getLastWinner();
   const race = await getLastRace();
-  loading = false;
   return (
     <>
       <Header />
 
-      {!loading && (
+      {drivers && winner && race && (
         <>
           <LastWinner driver={winner} race={race} />
           <Standings drivers={drivers} />
