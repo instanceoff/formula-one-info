@@ -15,11 +15,17 @@ const Page = async () => {
     <>
       <Header />
 
-      {drivers && winner && race && (
+      {(drivers && winner && race && (
         <>
           <LastWinner driver={winner} race={race} />
           <Standings drivers={drivers} />
         </>
+      )) || (
+        <div className='m-auto w-full h-full'>
+          <h1 className='w-fit m-auto text-6xl'>
+            Sorry, site is out of requests amount ;)
+          </h1>
+        </div>
       )}
     </>
   );
