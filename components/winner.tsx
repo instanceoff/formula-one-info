@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { CSSProperties } from 'react';
-import { IRaceDriver, IRace, TeamsColors } from '../pages/api/formulaModels';
+import { IRaceDriver, IRace, TeamsColors } from '../api/formulaModels';
 
 interface LastWinnerProps {
   driver: IRaceDriver;
@@ -32,7 +32,7 @@ const LastWinner: React.FC<LastWinnerProps> = ({ driver, race }) => {
             className='flex w-full items-center justify-center rounded-2xl p-2 border-8'
             style={backStyle}
           >
-            <div className='flex flex-row items-center rounded-2xl w-full bg-center bg-no-repeat bg-contain bg-opacity-20'>
+            <div className='flex flex-row items-center rounded-2xl w-full h-full bg-center'>
               <div className='flex w-fit flex-col justify-end'>
                 <Image
                   className=''
@@ -40,7 +40,7 @@ const LastWinner: React.FC<LastWinnerProps> = ({ driver, race }) => {
                     'https://www.f1fantasytracker.com/Images//Drivers/2021/RussellFull.png'
                   }
                   alt={''}
-                  width={270}
+                  width={350}
                   height={385}
                 />
                 <span className='absolute text-5xl justify-self-end p-2 bg-[#060616] bg-opacity-80 rounded-2xl'>
@@ -52,17 +52,15 @@ const LastWinner: React.FC<LastWinnerProps> = ({ driver, race }) => {
                 </span>
               </div>
 
-              <div
-                className='flex w-full h-full items-center justify-center bg-contain bg-no-repeat bg-center'
+              <span
+                className='w-full h-full py-20 bg-contain bg-no-repeat bg-center flex m-auto flex-col items-center font-bold text-[#F8D31E] '
                 style={backStyle2}
               >
-                <span className='flex flex-col items-center font-bold text-[#F8D31E] '>
-                  <span className='flex text-6xl font-semibold border-4 rounded-2xl p-3 text-white bg-[#060616]'>
-                    {race.competition.name}
-                  </span>
-                  <span className='text-9xl'>WINNER</span>
+                <span className='flex text-6xl font-semibold border-4 rounded-2xl p-3 text-white bg-[#060616]'>
+                  {race.competition.name}
                 </span>
-              </div>
+                <span className='text-9xl'>WINNER</span>
+              </span>
             </div>
           </div>
         </div>

@@ -1,10 +1,8 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
-  const { query } = useRouter();
   return (
     <>
       <div className='flex justify-center mt-2'>
