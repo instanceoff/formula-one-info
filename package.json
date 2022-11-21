@@ -6,11 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "update-types": "npx supabase gen types typescript --project-id \"fwmagngupawtpkphdxpa\" > types/supabase.ts"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.1.0",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
@@ -24,8 +22,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "node-fetch": "2.6.7",
     "postcss": "^8.4.18",
-    "supabase": "^1.14.3",
     "tailwindcss": "^3.2.2"
   }
 }

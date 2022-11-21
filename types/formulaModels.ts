@@ -89,7 +89,7 @@ export interface IDriver {
 
 export interface IRespond<ResponseType> {
   errors: any[];
-  get: 'rankings';
+  get: string;
   parameters: Object;
   response: ResponseType[];
   results: number;

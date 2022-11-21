@@ -1,8 +1,5 @@
 declare namespace NodeJS {
   interface ProcessEnv {
-    RAPIDAPI_KEY: string;
-    SUPABASE_URL: string;
-    SUPABASE_ANON_KEY: string;
-    PROJECT_ID: string;
+    NEXT_PUBLIC_RAPIDAPI_KEY: string;
   }
 }

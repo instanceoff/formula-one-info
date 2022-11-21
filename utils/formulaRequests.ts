@@ -5,11 +5,10 @@ import {
   IDriver,
   IRaceDriver,
 } from '../types/formulaModels';
-import { supabase } from './supabaseClient';
 
 var myHeaders = new Headers();
 
-myHeaders.append('x-rapidapi-key', process.env.RAPIDAPI_KEY);
+myHeaders.append('x-rapidapi-key', process.env.NEXT_PUBLIC_RAPIDAPI_KEY);
 myHeaders.append('x-rapidapi-host', 'v1.formula-1.api-sports.io');
 
 const requestOptions = {
@@ -19,34 +18,16 @@ const requestOptions = {
 };
 
 export const getRankingBySeason = async (year?: string) => {
-  const curYear = year ?? new Date().getFullYear();
+  const date = new Date();
+  const curYear = year ?? date.getFullYear();
 
-  const { data, error } = await supabase
-    .from('saves')
-    .select('savedData,created_at')
-    .eq('id', 'rankings/drivers');
+  const res = await fetch(
+    `https://v1.formula-1.api-sports.io/rankings/drivers?season=${curYear}`,
+    requestOptions as RequestInit
+  );
 
-  const res =
-    data ??
-    (await fetch(
-      `https://v1.formula-1.api-sports.io/rankings/drivers?season=${curYear}`,
-      requestOptions as RequestInit
-    ));
+  const resp: IRespond<IRankingDriver> = await res.json();
 
-  if (res instanceof Response) {
-  }
-
-  // const res = await fetch(
-  //   `https://v1.formula-1.api-sports.io/rankings/drivers?season=${curYear}`,
-  //   requestOptions as RequestInit
-  // );
-
-  const resp: IRespond<IRankingDriver> =
-    res == data
-      ? await data[0].savedData.json()
-      : res instanceof Response
-      ? await res.json()
-      : null;
   const drivers: IRankingDriver[] = resp.response;
 
   return drivers;

@@ -8,9 +8,12 @@ import {
 } from '../utils/formulaRequests';
 
 const Page = async () => {
-  const drivers = await getRankingBySeason();
-  const winner = await getLastWinner();
-  const race = await getLastRace();
+  const drivers = null;
+  const winner = null;
+  const race = null;
+  // const drivers = await getRankingBySeason();
+  // const winner = await getLastWinner();
+  // const race = await getLastRace();
   return (
     <>
       <Header />
