@@ -3,5 +3,6 @@ declare namespace NodeJS {
     RAPIDAPI_KEY: string;
     SUPABASE_URL: string;
     SUPABASE_ANON_KEY: string;
+    PROJECT_ID: string;
   }
 }

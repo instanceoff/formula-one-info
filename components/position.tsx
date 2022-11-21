@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { CSSProperties } from 'react';
-import { IRankingDriver, TeamsColors } from '../api/formulaModels';
+import { IRankingDriver, TeamsColors } from '../types/formulaModels';
 
 interface PositionProps {
   driver: IRankingDriver;
@@ -10,7 +10,7 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
   const lineColorStyle: CSSProperties = {
     backgroundImage:
       'linear-gradient(90deg, rgba(255, 255, 255, 0) 10%,' +
-      TeamsColors.get(driver.team.id) +
+      TeamsColors.get(driver.team.id!) +
       ')',
   };
 
@@ -66,23 +66,23 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
                 <Image
                   className='mr-4 overflow-hidden'
                   src={
-                    driver.position < 21
-                      ? `/images/helmet${driver.driver.id}.png`
-                      : driver.driver.image
+                    driver.position! < 21
+                      ? `/images/helmet${driver.driver.id!}.png`
+                      : driver.driver.image!
                   }
                   alt={'Helmet'}
                   width='62'
                   height='60'
                 />
                 <span className='text-4xl font-semibold'>
-                  {driver.driver.name}
+                  {driver.driver.name!}
                 </span>
               </div>
             </div>
             <div className='flex items-center'>
-              <span className='text-2xl'>{driver.team.name}</span>
+              <span className='text-2xl'>{driver.team.name!}</span>
               <Image
-                src={`/images/car${driver.team.id}.png`}
+                src={`/images/car${driver.team.id!}.png`}
                 alt={''}
                 width='250'
                 height='0'

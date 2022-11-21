@@ -5,6 +5,7 @@ import {
   IDriver,
   IRaceDriver,
 } from '../types/formulaModels';
+import { supabase } from './supabaseClient';
 
 var myHeaders = new Headers();
 
@@ -20,12 +21,32 @@ const requestOptions = {
 export const getRankingBySeason = async (year?: string) => {
   const curYear = year ?? new Date().getFullYear();
 
-  const res = await fetch(
-    `https://v1.formula-1.api-sports.io/rankings/drivers?season=${curYear}`,
-    requestOptions as RequestInit
-  );
+  const { data, error } = await supabase
+    .from('saves')
+    .select('savedData,created_at')
+    .eq('id', 'rankings/drivers');
 
-  const resp: IRespond<IRankingDriver> = await res.json();
+  const res =
+    data ??
+    (await fetch(
+      `https://v1.formula-1.api-sports.io/rankings/drivers?season=${curYear}`,
+      requestOptions as RequestInit
+    ));
+
+  if (res instanceof Response) {
+  }
+
+  // const res = await fetch(
+  //   `https://v1.formula-1.api-sports.io/rankings/drivers?season=${curYear}`,
+  //   requestOptions as RequestInit
+  // );
+
+  const resp: IRespond<IRankingDriver> =
+    res == data
+      ? await data[0].savedData.json()
+      : res instanceof Response
+      ? await res.json()
+      : null;
   const drivers: IRankingDriver[] = resp.response;
 
   return drivers;
@@ -70,15 +91,15 @@ export const getDriver = async (id: number) => {
   return driver;
 };
 
-export const getDriversOfTheSeason = async () => {
-  const drivers = await getRankingBySeason();
+// export const getDriversOfTheSeason = async () => {
+//   const drivers = await getRankingBySeason();
 
-  const fullDrivers: IDriver[] = [];
+//   const fullDrivers: IDriver[] = [];
 
-  for (let driver of drivers) {
-    const res = await getDriver(driver.driver.id!);
-    fullDrivers.push(res);
-  }
+//   for (let driver of drivers) {
+//     const res = await getDriver(driver.driver.id!);
+//     fullDrivers.push(res);
+//   }
 
-  return fullDrivers;
-};
+//   return fullDrivers;
+// };

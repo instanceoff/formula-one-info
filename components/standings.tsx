@@ -1,4 +1,4 @@
-import { IRankingDriver } from '../api/formulaModels';
+import { IRankingDriver } from '../types/formulaModels';
 import Position from './position';
 
 interface StandingsProps {

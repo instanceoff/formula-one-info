@@ -5,7 +5,7 @@ import {
   getRankingBySeason,
   getLastWinner,
   getLastRace,
-} from '../api/formulaRequests';
+} from '../utils/formulaRequests';
 
 const Page = async () => {
   const drivers = await getRankingBySeason();

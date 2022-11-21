@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { CSSProperties } from 'react';
-import { IRaceDriver, IRace, TeamsColors } from '../api/formulaModels';
+import { IRaceDriver, IRace, TeamsColors } from '../types/formulaModels';
 
 interface LastWinnerProps {
   driver: IRaceDriver;
@@ -21,7 +21,7 @@ const LastWinner: React.FC<LastWinnerProps> = ({ driver, race }) => {
   };
 
   const teamColor = {
-    color: TeamsColors.get(driver.team.id),
+    color: TeamsColors.get(driver.team.id!),
   };
 
   return (
@@ -37,17 +37,17 @@ const LastWinner: React.FC<LastWinnerProps> = ({ driver, race }) => {
                 <Image
                   className=''
                   src={`https://www.f1fantasytracker.com/Images//Drivers/2021/${
-                    driver.driver.name.split(' ')[1]
+                    driver.driver.name!.split(' ')[1]
                   }Full.png`}
                   alt={''}
                   width={350}
                   height={385}
                 />
                 <span className='absolute text-5xl justify-self-end p-2 bg-[#060616] bg-opacity-80 rounded-2xl'>
-                  {driver.driver.name.split(' ')[0]}
+                  {driver.driver.name!.split(' ')[0]}
                   <br />
                   <span className='text-7xl font-semibold' style={teamColor}>
-                    {driver.driver.name.split(' ')[1]}
+                    {driver.driver.name!.split(' ')[1]}
                   </span>
                 </span>
               </div>
