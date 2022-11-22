@@ -1,19 +1,18 @@
 import Header from '../components/header';
 import Standings from '../components/standings';
 import LastWinner from '../components/winner';
-import {
-  getRankingBySeason,
-  getLastWinner,
-  getLastRace,
-} from '../utils/formulaRequests';
+import { getRankingBySeason, getLastWin } from '../utils/formulaRequests';
+import { connectMongo } from '../utils/mongodb';
 
 const Page = async () => {
+  connectMongo();
+
   const drivers = null;
   const winner = null;
   const race = null;
+
   // const drivers = await getRankingBySeason();
-  // const winner = await getLastWinner();
-  // const race = await getLastRace();
+  // const {winner, race} = await getLastWin();
   return (
     <>
       <Header />

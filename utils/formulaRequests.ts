@@ -27,7 +27,6 @@ export const getRankingBySeason = async (year?: string) => {
   );
 
   const resp: IRespond<IRankingDriver> = await res.json();
-
   const drivers: IRankingDriver[] = resp.response;
 
   return drivers;
@@ -41,23 +40,24 @@ export const getLastRace = async () => {
 
   const resp: IRespond<IRace> = await res.json();
   const race: IRace = resp.response[0];
+
   return race;
 };
 
-export const getLastWinner = async () => {
-  const lastRace = await getLastRace();
+export const getLastWin = async () => {
+  const race = await getLastRace();
 
-  const lastRaceID = lastRace && lastRace.id;
+  const raceID = race && race.id;
 
   const res = await fetch(
-    `https://v1.formula-1.api-sports.io/rankings/races?race=${lastRaceID}`,
+    `https://v1.formula-1.api-sports.io/rankings/races?race=${raceID}`,
     requestOptions as RequestInit
   );
 
   const resp: IRespond<IRaceDriver> = await res.json();
   const driver: IRaceDriver = resp.response[0];
 
-  return driver;
+  return { driver, race };
 };
 
 export const getDriver = async (id: number) => {
@@ -71,16 +71,3 @@ export const getDriver = async (id: number) => {
 
   return driver;
 };
-
-// export const getDriversOfTheSeason = async () => {
-//   const drivers = await getRankingBySeason();
-
-//   const fullDrivers: IDriver[] = [];
-
-//   for (let driver of drivers) {
-//     const res = await getDriver(driver.driver.id!);
-//     fullDrivers.push(res);
-//   }
-
-//   return fullDrivers;
-// };

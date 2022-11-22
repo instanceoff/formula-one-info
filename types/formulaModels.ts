@@ -1,7 +1,17 @@
 export interface IRankingDriver {
   position: number;
-  driver: Partial<IDriver>;
-  team: Partial<ITeam>;
+  driver: {
+    id: number;
+    name: string;
+    abbr: string;
+    number: number;
+    image: string;
+  };
+  team: {
+    id: number;
+    name: string;
+    image: string;
+  };
   points: number;
   wins: number;
   behind: number;
@@ -42,8 +52,8 @@ export interface IRace {
 }
 
 export interface IFastestLap {
-  driver?: IDriver;
-  time?: string;
+  driver: IDriver;
+  time: string;
 }
 
 export interface ILaps {
@@ -93,6 +103,10 @@ export interface IRespond<ResponseType> {
   parameters: Object;
   response: ResponseType[];
   results: number;
+}
+export interface IMongoDataType<ResponseType> {
+  updated?: string;
+  data: ResponseType[];
 }
 
 export enum ETeamsColors {
