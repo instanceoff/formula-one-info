@@ -1,7 +1,6 @@
 import { MongoClient, MongoClientOptions, ServerApiVersion } from 'mongodb';
 
-const uri =
-  'mongodb+srv://instance:mongoformula1@cluster0.klx8tr1.mongodb.net/?retryWrites=true&w=majority';
+const uri = process.env.NEXT_PUBLIC_MONGODB_URI;
 
 export const client = new MongoClient(uri, {
   useNewUrlParser: true,
