@@ -54,10 +54,7 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
                   </span>
                 </div>
                 <div className='flex mx-auto rounded-r-full items-center justify-center h-16 text-4xl'>
-                  <span
-                    className='mx-auto pt-1 text-white text-5xl font-bold text-stroke-2'
-                    // style={test}
-                  >
+                  <span className='mx-auto pt-1 text-white text-5xl font-bold text-stroke-2'>
                     {driver.position}
                   </span>
                 </div>
