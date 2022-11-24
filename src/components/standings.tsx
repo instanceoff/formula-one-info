@@ -1,8 +1,9 @@
+import { rankingDrivers } from '@prisma/client';
 import { IRankingDriver } from '../types/formulaModels';
 import Position from './position';
 
 interface StandingsProps {
-  drivers: IRankingDriver[];
+  drivers: rankingDrivers[];
 }
 
 const Standings: React.FC<StandingsProps> = ({ drivers }) => {

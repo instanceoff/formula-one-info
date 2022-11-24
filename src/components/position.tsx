@@ -1,9 +1,10 @@
+import { rankingDrivers } from '@prisma/client';
 import Image from 'next/image';
 import { CSSProperties } from 'react';
 import { IRankingDriver, TeamsColors } from '../types/formulaModels';
 
 interface PositionProps {
-  driver: IRankingDriver;
+  driver: rankingDrivers;
 }
 
 const Position: React.FC<PositionProps> = ({ driver }) => {

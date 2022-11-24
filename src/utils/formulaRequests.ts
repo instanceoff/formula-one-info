@@ -5,6 +5,7 @@ import {
   IDriver,
   IRaceDriver,
 } from '../types/formulaModels';
+import { insertData } from './mongodb';
 
 var myHeaders = new Headers();
 
@@ -29,6 +30,8 @@ export const getRankingBySeason = async (year?: string) => {
   const resp: IRespond<IRankingDriver> = await res.json();
   const drivers: IRankingDriver[] = resp.response;
 
+  // await insertManyData('formula', 'rankingDrivers', drivers);
+
   return drivers;
 };
 
@@ -40,6 +43,8 @@ export const getLastRace = async () => {
 
   const resp: IRespond<IRace> = await res.json();
   const race: IRace = resp.response[0];
+
+  await insertData('formula', 'lastRace', { ...race, updated: new Date() });
 
   return race;
 };
@@ -56,6 +61,8 @@ export const getLastWin = async () => {
 
   const resp: IRespond<IRaceDriver> = await res.json();
   const driver: IRaceDriver = resp.response[0];
+
+  await insertData('formula', 'lastWinner', { ...driver, updated: new Date() });
 
   return { driver, race };
 };
