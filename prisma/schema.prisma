@@ -84,7 +84,7 @@ model lastRace {
   status      String
   timezone    String
   type        String
-  updated     DateTime            @db.Date
+  updated  DateTime?         @db.Date
   /// Could not determine type: the field only had null or empty values in the sample set.
   weather     Json?
 }
@@ -101,12 +101,18 @@ model lastWinner {
   race     LastWinnerRace
   team     LastWinnerTeam
   time     String
-  updated  DateTime         @db.Date
+  updated  DateTime?         @db.Date
 }
 
 model rankingDrivers {
   id       String               @id @default(auto()) @map("_id") @db.ObjectId
   /// Could not determine type: the field only had null or empty values in the sample set.
+  pilots   RankingDriversPilots[]
+  season   Int
+  updated  DateTime?         @db.Date
+}
+
+type RankingDriversPilots {
   behind   Json?
   driver   RankingDriversDriver
   points   Int?

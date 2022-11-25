@@ -4,10 +4,11 @@ import LastWinner from '../components/winner';
 import { getRankingBySeason, getLastWin } from '../utils/formulaRequests';
 // import { connectMongo } from '../utils/mongodb';
 import {
-  getLastRacePrisma,
-  getLastWinnerPrisma,
-  getRankingDriversPrisma,
+  getDatabaseLastRacePrisma,
+  getDatabaseLastWinnerPrisma,
+  getDatabaseRankingDriversPrisma,
   prisma,
+  updateDatabaseRankigDrivers,
 } from '../utils/prisma';
 
 const Page = async () => {
@@ -22,9 +23,12 @@ const Page = async () => {
   // const drivers = await getRankingBySeason();
   // const { driver, race } = await getLastWin();
 
-  const drivers = await getRankingDriversPrisma();
-  const driver = await getLastWinnerPrisma();
-  const race = await getLastRacePrisma();
+  // await updateDatabaseRankigDrivers();
+
+  const drivers = await getDatabaseRankingDriversPrisma();
+  const driver = await getDatabaseLastWinnerPrisma();
+  const race = await getDatabaseLastRacePrisma();
+
   return (
     <>
       <Header />

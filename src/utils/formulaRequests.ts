@@ -1,11 +1,16 @@
 import {
+  lastRace,
+  lastWinner,
+  rankingDrivers,
+  RankingDriversPilots,
+} from '@prisma/client';
+import {
   IRankingDriver,
   IRespond,
   IRace,
   IDriver,
   IRaceDriver,
 } from '../types/formulaModels';
-import { insertData } from './mongodb';
 
 var myHeaders = new Headers();
 
@@ -27,10 +32,8 @@ export const getRankingBySeason = async (year?: string) => {
     requestOptions as RequestInit
   );
 
-  const resp: IRespond<IRankingDriver> = await res.json();
-  const drivers: IRankingDriver[] = resp.response;
-
-  // await insertManyData('formula', 'rankingDrivers', drivers);
+  const resp: IRespond<RankingDriversPilots> = await res.json();
+  const drivers: RankingDriversPilots[] = resp.response;
 
   return drivers;
 };
@@ -41,10 +44,8 @@ export const getLastRace = async () => {
     requestOptions as RequestInit
   );
 
-  const resp: IRespond<IRace> = await res.json();
-  const race: IRace = resp.response[0];
-
-  await insertData('formula', 'lastRace', { ...race, updated: new Date() });
+  const resp: IRespond<lastRace> = await res.json();
+  const race: lastRace = resp.response[0];
 
   return race;
 };
@@ -59,10 +60,8 @@ export const getLastWin = async () => {
     requestOptions as RequestInit
   );
 
-  const resp: IRespond<IRaceDriver> = await res.json();
-  const driver: IRaceDriver = resp.response[0];
-
-  await insertData('formula', 'lastWinner', { ...driver, updated: new Date() });
+  const resp: IRespond<lastWinner> = await res.json();
+  const driver: lastWinner = resp.response[0];
 
   return { driver, race };
 };

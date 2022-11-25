@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "turbo": "next dev --turbo"
   },
   "dependencies": {
     "@prisma/client": "^4.6.1",
@@ -15,8 +16,7 @@
     "dotenv": "^16.0.3",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.2",
-    "mongodb": "^4.12.0",
-    "next": "13.0.2",
+    "next": "13.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "4.8.4"
