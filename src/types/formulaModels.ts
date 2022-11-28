@@ -1,10 +1,20 @@
 export interface IRankingDriver {
   position: number;
-  driver: Partial<IDriver>;
-  team: Partial<ITeam>;
+  driver: {
+    id: number;
+    name: string;
+    abbr: string;
+    number: number;
+    image: string;
+  };
+  team: {
+    id: number;
+    name: string;
+    logo: string;
+  };
   points: number;
-  wins: number;
-  behind: number;
+  wins?: number;
+  behind?: number;
   season: number;
 }
 
@@ -14,10 +24,16 @@ export interface ITeam {
   logo: string;
 }
 
-export interface IRaceDriver {
+export interface IRankingRace {
   race: { id: number };
-  driver: Partial<IDriver>;
-  team: Partial<ITeam>;
+  driver: {
+    id: number;
+    name: string;
+    abbr: string;
+    number: number;
+    image: string;
+  };
+  team: ITeam;
   position: number;
   time: string;
   laps: number;
@@ -37,13 +53,13 @@ export interface IRace {
   distance: string;
   timezone: string;
   date: string;
-  weather: string;
+  weather?: string;
   status: string;
 }
 
 export interface IFastestLap {
-  driver?: IDriver;
-  time?: string;
+  driver: IDriver;
+  time: string;
 }
 
 export interface ILaps {
@@ -54,7 +70,7 @@ export interface ILaps {
 export interface ICompetition {
   id: number;
   name: string;
-  location: string;
+  location: { country: string; city: string };
 }
 
 export interface ILocation {
@@ -93,6 +109,10 @@ export interface IRespond<ResponseType> {
   parameters: Object;
   response: ResponseType[];
   results: number;
+}
+export interface IMongoDataType<ResponseType> {
+  updated?: string;
+  data: ResponseType[];
 }
 
 export enum ETeamsColors {

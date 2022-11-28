@@ -28,6 +28,12 @@ const Header: React.FC<HeaderProps> = () => {
             </Link>
             <Link href={'/drivers'}>DRIVERS</Link>
             <Link href={'/teams'}>TEAMS</Link>
+            {/* <button
+              className='active:text-[#F8D31E]'
+              onClick={() => testAddingItems()}
+            >
+              TEAMS
+            </button> */}
           </nav>
         </div>
       </div>

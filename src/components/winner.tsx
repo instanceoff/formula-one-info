@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { CSSProperties } from 'react';
-import { IRaceDriver, IRace, TeamsColors } from '../types/formulaModels';
+import { IRankingRace, IRace, TeamsColors } from '../types/formulaModels';
 
 interface LastWinnerProps {
-  driver: IRaceDriver;
+  driver: IRankingRace;
   race: IRace;
 }
 
@@ -21,7 +21,7 @@ const LastWinner: React.FC<LastWinnerProps> = ({ driver, race }) => {
   };
 
   const teamColor = {
-    color: TeamsColors.get(driver.team.id!),
+    color: TeamsColors.get(driver.team.id),
   };
 
   return (
