@@ -21,6 +21,9 @@ const requestOptions = {
   method: 'GET',
   headers: myHeaders,
   redirect: 'follow',
+  next: {
+    revalidate: 86400,
+  },
 };
 
 export const getRankingBySeason = async (year?: string) => {
