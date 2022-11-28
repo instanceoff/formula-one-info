@@ -3,7 +3,7 @@ import { IRankingDriver } from '../types/formulaModels';
 import Position from './position';
 
 interface StandingsProps {
-  drivers: RankingDriversPilots[];
+  drivers: IRankingDriver[];
 }
 
 const Standings: React.FC<StandingsProps> = ({ drivers }) => {

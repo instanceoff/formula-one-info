@@ -1,11 +1,11 @@
 import { lastRace, lastWinner } from '@prisma/client';
 import Image from 'next/image';
 import { CSSProperties } from 'react';
-import { IRaceDriver, IRace, TeamsColors } from '../types/formulaModels';
+import { IRankingRace, IRace, TeamsColors } from '../types/formulaModels';
 
 interface LastWinnerProps {
-  driver: lastWinner;
-  race: lastRace;
+  driver: IRankingRace;
+  race: IRace;
 }
 
 const LastWinner: React.FC<LastWinnerProps> = ({ driver, race }) => {

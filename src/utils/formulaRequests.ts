@@ -1,15 +1,9 @@
 import {
-  lastRace,
-  lastWinner,
-  rankingDrivers,
-  RankingDriversPilots,
-} from '@prisma/client';
-import {
   IRankingDriver,
   IRespond,
   IRace,
   IDriver,
-  IRaceDriver,
+  IRankingRace,
 } from '../types/formulaModels';
 
 var myHeaders = new Headers();
@@ -35,8 +29,8 @@ export const getRankingBySeason = async (year?: string) => {
     requestOptions as RequestInit
   );
 
-  const resp: IRespond<RankingDriversPilots> = await res.json();
-  const drivers: RankingDriversPilots[] = resp.response;
+  const resp: IRespond<IRankingDriver> = await res.json();
+  const drivers: IRankingDriver[] = resp.response;
 
   return drivers;
 };
@@ -47,8 +41,8 @@ export const getLastRace = async () => {
     requestOptions as RequestInit
   );
 
-  const resp: IRespond<lastRace> = await res.json();
-  const race: lastRace = resp.response[0];
+  const resp: IRespond<IRace> = await res.json();
+  const race: IRace = resp.response[0];
 
   return race;
 };
@@ -63,8 +57,8 @@ export const getLastWin = async () => {
     requestOptions as RequestInit
   );
 
-  const resp: IRespond<lastWinner> = await res.json();
-  const driver: lastWinner = resp.response[0];
+  const resp: IRespond<IRankingRace> = await res.json();
+  const driver: IRankingRace = resp.response[0];
 
   return { driver, race };
 };

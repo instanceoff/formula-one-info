@@ -10,11 +10,11 @@ export interface IRankingDriver {
   team: {
     id: number;
     name: string;
-    image: string;
+    logo: string;
   };
   points: number;
-  wins: number;
-  behind: number;
+  wins?: number;
+  behind?: number;
   season: number;
 }
 
@@ -24,10 +24,16 @@ export interface ITeam {
   logo: string;
 }
 
-export interface IRaceDriver {
+export interface IRankingRace {
   race: { id: number };
-  driver: Partial<IDriver>;
-  team: Partial<ITeam>;
+  driver: {
+    id: number;
+    name: string;
+    abbr: string;
+    number: number;
+    image: string;
+  };
+  team: ITeam;
   position: number;
   time: string;
   laps: number;
@@ -47,7 +53,7 @@ export interface IRace {
   distance: string;
   timezone: string;
   date: string;
-  weather: string;
+  weather?: string;
   status: string;
 }
 
@@ -64,7 +70,7 @@ export interface ILaps {
 export interface ICompetition {
   id: number;
   name: string;
-  location: string;
+  location: { country: string; city: string };
 }
 
 export interface ILocation {
