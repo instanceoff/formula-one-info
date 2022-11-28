@@ -61,7 +61,7 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
               </div>
               <div className='flex items-center'>
                 <Image
-                  className='mr-4 overflow-hidden'
+                  className='mr-4 overflow-hidden hidden md:inline '
                   src={
                     driver.position < 21
                       ? `/images/helmet${driver.driver.id}.png`
@@ -77,8 +77,11 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
               </div>
             </div>
             <div className='flex items-center'>
-              <span className='text-2xl'>{driver.team.name}</span>
+              <span className='text-2xl hidden xl:inline'>
+                {driver.team.name}
+              </span>
               <Image
+                className='hidden lg:inline'
                 src={`/images/car${driver.team.id}.png`}
                 alt={''}
                 width='250'
