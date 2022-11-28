@@ -1,4 +1,3 @@
-import { rankingDrivers, RankingDriversPilots } from '@prisma/client';
 import { IRankingDriver } from '../types/formulaModels';
 import Position from './position';
 

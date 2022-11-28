@@ -1,4 +1,3 @@
-import { lastRace, lastWinner } from '@prisma/client';
 import Image from 'next/image';
 import { CSSProperties } from 'react';
 import { IRankingRace, IRace, TeamsColors } from '../types/formulaModels';
