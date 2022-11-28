@@ -3,14 +3,6 @@ import Header from '../components/header';
 import Standings from '../components/standings';
 import LastWinner from '../components/winner';
 import { getRankingBySeason, getLastWin } from '../utils/formulaRequests';
-// import { connectMongo } from '../utils/mongodb';
-import {
-  getDatabaseLastRacePrisma,
-  getDatabaseLastWinnerPrisma,
-  getDatabaseRankingDriversPrisma,
-  prisma,
-  updateDatabaseRankigDrivers,
-} from '../utils/prisma';
 import Loading from './loading';
 
 const Page = async () => {
