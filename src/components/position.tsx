@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { CSSProperties } from 'react';
 import { IRankingDriver, TeamsColors } from '../types/formulaModels';
-
+import * as fs from 'fs';
 interface PositionProps {
   driver: IRankingDriver;
 }
@@ -29,6 +29,8 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
       'repeating-linear-gradient( 45deg, rgba(255,255,255, 0.1), rgba(255,255,255, 0.1) 2px, transparent 2px, transparent 6px )',
   };
 
+  const helmetImage = `/images/helmet${driver.driver.id}.png`;
+
   return (
     <>
       <div className='flex text-[#F2F2F2] w-full h-full items-center justify-center'>
@@ -45,7 +47,7 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
                 className='flex w-36 mr-4 justify-between rounded-r-[999px] rounded-bl-[800px]'
                 style={pointsColorStyle}
               >
-                <div className='flex flex-col text-black  w-16 h-16 rounded-full rounded-tl-none  outline outline-[#060616] outline-3'>
+                <div className='flex flex-col text-black  w-16 h-16 rounded-full rounded-tl-none outline outline-[#060616] outline-3'>
                   <span className='absolute z-10 px-[0.12rem] text-xs font-bold'>
                     PTS
                   </span>
@@ -60,17 +62,23 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
                 </div>
               </div>
               <div className='flex items-center'>
-                <Image
-                  className='mr-4 overflow-hidden hidden md:inline '
-                  src={
-                    driver.position < 21
-                      ? `/images/helmet${driver.driver.id}.png`
-                      : driver.driver.image
-                  }
-                  alt={'Helmet'}
-                  width='62'
-                  height='60'
-                />
+                {(
+                  <Image
+                    className='mr-4 overflow-hidden hidden md:inline '
+                    src={helmetImage}
+                    alt={'Helmet'}
+                    width='62'
+                    height='60'
+                  />
+                ) || (
+                  <Image
+                    className='mr-4 overflow-hidden hidden md:inline '
+                    src={driver.driver.image}
+                    alt={'Helmet'}
+                    width='62'
+                    height='60'
+                  />
+                )}
                 <span className='text-4xl font-semibold'>
                   {driver.driver.name}
                 </span>
@@ -81,7 +89,7 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
                 {driver.team.name}
               </span>
               <Image
-                className='hidden lg:inline'
+                className='hidden md:inline'
                 src={`/images/car${driver.team.id}.png`}
                 alt={''}
                 width='250'
