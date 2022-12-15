@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { CSSProperties } from 'react';
 import { IRankingDriver, TeamsColors } from '../types/formulaModels';
-import * as fs from 'fs';
 interface PositionProps {
   driver: IRankingDriver;
 }
