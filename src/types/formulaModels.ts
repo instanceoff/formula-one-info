@@ -90,17 +90,17 @@ export interface IDriver {
   abbr: string;
   image: string;
   nationality: string;
-  country: any;
+  country: { name: string; code: string };
   birthdate: string;
   birthplace: string;
   number: number;
   grands_prix_entered: string;
   world_championships: string;
   podiums: number;
-  highest_race_finish: any;
+  highest_race_finish: { position: number; number: number };
   highest_grid_position: number;
   career_points: string;
-  teams: any[];
+  teams: { season: number; team: ITeam }[];
 }
 
 export interface IRespond<ResponseType> {
