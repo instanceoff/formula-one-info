@@ -35,6 +35,24 @@ export const getRankingBySeason = async (year?: string) => {
   return drivers;
 };
 
+export const getSeasons = async () => {
+  const res = await fetch(
+    `https://v1.formula-1.api-sports.io/seasons`,
+    requestOptions as RequestInit
+  );
+
+  const resp: IRespond<number> = await res.json();
+  const drivers: number[] = resp.response;
+
+  return drivers;
+};
+
+export const convertToVaariants = (input: string[], baseLink: string) => {
+  return input.map((inp) => {
+    return { name: inp, link: baseLink + inp };
+  });
+};
+
 export const getLastRace = async () => {
   const res = await fetch(
     `https://v1.formula-1.api-sports.io/races?last=1&type=race`,

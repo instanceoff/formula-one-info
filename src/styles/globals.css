@@ -20,6 +20,10 @@ body {
   font-family: 'Mona Sans';
 }
 
+:root {
+  font-size: xx-small;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -45,6 +49,32 @@ a {
   body {
     color: white;
     background: #060616;
+  }
+}
+
+@media (min-width: 320px) {
+  :root {
+    font-size: x-small;
+  }
+}
+@media (min-width: 640px) {
+  :root {
+    font-size: smaller;
+  }
+}
+@media (min-width: 768px) {
+  :root {
+    font-size: small;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    font-size: medium;
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    font-size: medium;
   }
 }
 
