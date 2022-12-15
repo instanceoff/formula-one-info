@@ -5,13 +5,7 @@ import Loading from '../../../loading';
 
 interface RankingsDriversProps {}
 
-const RankingsDrivers = async ({
-  params,
-  searchParams,
-}: {
-  params: { season: string };
-  searchParams: { id: string };
-}) => {
+const RankingsDrivers = async ({ params }: { params: { season: string } }) => {
   const drivers = await getRankingBySeason(params.season);
 
   return (
