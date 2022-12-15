@@ -15,6 +15,7 @@ const Page = async () => {
   return (
     <>
       <Suspense fallback={<Loading />}>
+        <LastWinner driver={driver} race={race} />
         {(requests && <Standings drivers={drivers} />) || (
           <div className='m-auto w-full h-full'>
             <h1 className='w-fit m-auto text-6xl'>
