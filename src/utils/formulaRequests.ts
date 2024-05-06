@@ -6,7 +6,9 @@ import {
   IRankingRace,
 } from '../types/formulaModels';
 
-var myHeaders = new Headers();
+const helmetRequest = `https://media.formula1.com/image/upload/content/dam/fom-website/manual/Helmets${new Date().getFullYear()}`;
+const myHeaders = new Headers();
+const requestBase = 'https://v1.formula-1.api-sports.io/';
 
 myHeaders.append('x-rapidapi-key', process.env.NEXT_PUBLIC_RAPIDAPI_KEY);
 myHeaders.append('x-rapidapi-host', 'v1.formula-1.api-sports.io');
@@ -25,7 +27,7 @@ export const getRankingBySeason = async (year?: string) => {
   const curYear = year ?? date.getFullYear();
 
   const res = await fetch(
-    `https://v1.formula-1.api-sports.io/rankings/drivers?season=${curYear}`,
+    `${requestBase}rankings/drivers?season=${curYear}`,
     requestOptions as RequestInit
   );
 
@@ -37,7 +39,7 @@ export const getRankingBySeason = async (year?: string) => {
 
 export const getSeasons = async () => {
   const res = await fetch(
-    `https://v1.formula-1.api-sports.io/seasons`,
+    `${requestBase}seasons`,
     requestOptions as RequestInit
   );
 
@@ -55,7 +57,7 @@ export const convertToVaariants = (input: string[], baseLink: string) => {
 
 export const getLastRace = async () => {
   const res = await fetch(
-    `https://v1.formula-1.api-sports.io/races?last=1&type=race`,
+    `${requestBase}races?last=1&type=race`,
     requestOptions as RequestInit
   );
 
@@ -71,7 +73,7 @@ export const getLastWin = async () => {
   const raceID = race && race.id;
 
   const res = await fetch(
-    `https://v1.formula-1.api-sports.io/rankings/races?race=${raceID}`,
+    `${requestBase}rankings/races?race=${raceID}`,
     requestOptions as RequestInit
   );
 
@@ -81,9 +83,13 @@ export const getLastWin = async () => {
   return { driver, race };
 };
 
+export const getDriverHelmetImage = (driverLastName: string) => {
+  return `${helmetRequest}/${driverLastName.toLocaleLowerCase()}`;
+};
+
 export const getDriver = async (id: number) => {
   const res = await fetch(
-    `https://v1.formula-1.api-sports.io/drivers?id=${id}`,
+    `${requestBase}drivers?id=${id}`,
     requestOptions as RequestInit
   );
 

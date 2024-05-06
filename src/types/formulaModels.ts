@@ -129,14 +129,14 @@ export enum ETeamsColors {
 }
 
 export const TeamsColors = new Map([
-  [1, '#3671C6'],
-  [2, '#F58020'],
-  [3, '#F91536'],
-  [5, '#6CD3BF'],
-  [13, '#6CD3BF'],
-  [18, '#C92D4B'],
-  [12, '#37BEDD'],
-  [14, '#B6BABD'],
-  [7, '#5E8FAA'],
-  [17, '#358C75'],
+  [1, 'RedBull'],
+  [2, 'McLaren'],
+  [3, 'Ferrari'],
+  [5, 'Mercedes'],
+  [13, 'Alpine'],
+  [18, 'Stake'],
+  [12, 'Williams'],
+  [14, 'Haas'],
+  [7, 'RB'],
+  [17, 'AstonMartin'],
 ]);

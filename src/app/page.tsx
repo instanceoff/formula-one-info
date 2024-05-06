@@ -3,20 +3,24 @@ import Standings from '@components/standings';
 import LastWinner from '@components/winner';
 import { getRankingBySeason, getLastWin } from '@utils/formulaRequests';
 import Loading from './loading';
+import Head from 'next/head';
 
 const Page = async () => {
   const driversRes = getRankingBySeason();
   const lastWinRes = getLastWin();
 
-  const requests = await Promise.all([driversRes, lastWinRes]);
+  const responses = await Promise.all([driversRes, lastWinRes]);
 
-  const [drivers, { driver, race }] = requests;
+  const [drivers, { driver, race }] = responses;
 
   return (
     <>
+      <Head>
+        <title>Current season ranking</title>
+      </Head>
       <Suspense fallback={<Loading />}>
         <LastWinner driver={driver} race={race} />
-        {(requests && <Standings drivers={drivers} />) || (
+        {(responses && <Standings drivers={drivers} />) || (
           <div className='m-auto w-full h-full'>
             <h1 className='w-fit m-auto text-6xl'>
               Sorry, site is out of requests amount ;)

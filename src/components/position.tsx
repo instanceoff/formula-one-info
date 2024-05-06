@@ -1,50 +1,35 @@
 import Image from 'next/image';
 import { CSSProperties } from 'react';
 import { IRankingDriver, TeamsColors } from '../types/formulaModels';
+import { getDriverHelmetImage } from '@utils/formulaRequests';
 interface PositionProps {
   driver: IRankingDriver;
 }
 
-const Position: React.FC<PositionProps> = ({ driver }) => {
-  const lineColorStyle: CSSProperties = {
-    backgroundImage:
-      'linear-gradient(90deg, rgba(255, 255, 255, 0) 10%,' +
-      TeamsColors.get(driver.team.id!) +
-      ')',
-  };
+const Position = ({ driver }: PositionProps) => {
+  const driverTeamColor = 'to-' + TeamsColors.get(driver.team.id);
+  const helmetImageUrl = getDriverHelmetImage(driver.driver.name.split(' ')[1]);
 
-  const pointsColorStyle = {
-    backgroundColor: `${
-      (driver.position == 1 && '#F8D31E') ||
-      (driver.position == 2 && '#d3d3d3') ||
-      (driver.position == 3 && '#e88109') ||
-      '#f2f2f2'
-    }`,
+  const pointsColors: { [position: number]: string } = {
+    1: 'bg-firstPlace',
+    2: 'bg-secondPlace',
+    3: 'bg-thirdPlace',
   };
-
-  const backStyle = {
-    opacity: 1,
-    backgroundImage:
-      'repeating-linear-gradient( 45deg, rgba(255,255,255, 0.1), rgba(255,255,255, 0.1) 2px, transparent 2px, transparent 6px )',
-  };
-
-  const helmetImage = `/images/helmet${driver.driver.id}.png`;
 
   return (
     <>
       <div className='flex text-[#F2F2F2] w-full h-full items-center justify-center'>
         <div
-          className={`flex justify-between items-center w-full rounded-bl-[550px] rounded-tr-[999px] -z-20`}
-          style={backStyle}
+          className={`flex bg-diagonalLines justify-between items-center w-full rounded-bl-[550px] rounded-tr-[999px] -z-20`}
         >
           <div
-            style={lineColorStyle}
-            className={`flex testik justify-between items-center w-full rounded-bl-[550px] rounded-tr-[999px] -z-20`}
+            className={`flex justify-between items-center w-full rounded-bl-[550px] rounded-tr-[999px] -z-20 bg-gradient-to-r from-transparent ${driverTeamColor}`}
           >
             <div className='flex'>
               <div
-                className='flex w-36 mr-4 justify-between rounded-r-[999px] rounded-bl-[800px]'
-                style={pointsColorStyle}
+                className={`flex w-36 mr-4 justify-between rounded-r-[999px] rounded-bl-[800px] ${
+                  pointsColors[driver.position] || 'bg-[#f2f2f2]'
+                }`}
               >
                 <div className='flex flex-col text-black  w-16 h-16 rounded-full rounded-tl-none outline outline-[#060616] outline-3'>
                   <span className='absolute z-10 px-[0.12rem] text-xs font-bold'>
@@ -64,10 +49,10 @@ const Position: React.FC<PositionProps> = ({ driver }) => {
                 {(
                   <Image
                     className='mr-4 overflow-hidden hidden md:inline '
-                    src={helmetImage}
+                    src={helmetImageUrl}
                     alt={'Helmet'}
-                    width='62'
-                    height='60'
+                    width='92'
+                    height='90'
                   />
                 ) || (
                   <Image

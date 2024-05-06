@@ -2,9 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  experimental: {
-    appDir: true,
-  },
   images: {
     remotePatterns: [
       {
@@ -20,6 +17,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'www.f1fantasytracker.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.formula1.com',
         pathname: '/**',
       },
     ],

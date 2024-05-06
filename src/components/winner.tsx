@@ -20,9 +20,7 @@ const LastWinner: React.FC<LastWinnerProps> = ({ driver, race }) => {
     backgroundImage: 'url("/images/brazil.svg")',
   };
 
-  const teamColor = {
-    color: TeamsColors.get(driver.team.id),
-  };
+  const teamColor = 'text-' + TeamsColors.get(driver?.team?.id);
 
   return (
     <>
@@ -46,7 +44,7 @@ const LastWinner: React.FC<LastWinnerProps> = ({ driver, race }) => {
                 <span className='absolute text-5xl justify-self-end p-2 bg-[#060616] bg-opacity-80 rounded-2xl'>
                   {driver.driver.name!.split(' ')[0]}
                   <br />
-                  <span className='text-7xl font-semibold' style={teamColor}>
+                  <span className={`text-7xl font-semibold ${teamColor}`}>
                     {driver.driver.name!.split(' ')[1]}
                   </span>
                 </span>
