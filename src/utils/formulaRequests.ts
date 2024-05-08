@@ -83,8 +83,14 @@ export const getLastWin = async () => {
   return { driver, race };
 };
 
-export const getDriverHelmetImage = (driverLastName: string) => {
-  return `${helmetRequest}/${driverLastName.toLocaleLowerCase()}`;
+export const getDriverHelmetImage = async (driverLastName: string) => {
+  const res = await fetch(
+    `${helmetRequest}/${driverLastName.toLocaleLowerCase()}`,
+    requestOptions as RequestInit
+  );
+  return res.status !== 404
+    ? `${helmetRequest}/${driverLastName.toLocaleLowerCase()}`
+    : null;
 };
 
 export const getDriver = async (id: number) => {

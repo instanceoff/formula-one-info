@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { IRankingDriver, TeamsColors } from '../types/formulaModels';
 import { getDriverHelmetImage } from '@utils/formulaRequests';
+import { use } from 'react';
 interface PositionProps {
   driver: IRankingDriver;
 }
@@ -36,21 +37,20 @@ const Position = ({
 
   const DriverInfo = () => {
     const lastName = driver.name.split(' ')[1];
-    const imageUrl = getDriverHelmetImage(lastName) || driver.image;
-
-    const settings = imageUrl
+    const helmetImage = use(getDriverHelmetImage(lastName));
+    const imageProperties = helmetImage
       ? {
-          src: imageUrl,
+          src: helmetImage,
           width: 92,
           height: 90,
         }
       : { src: driver.image, width: 62, height: 60 };
     return (
-      <div className={`flex items-center ${imageUrl! || 'mr-4'}`}>
+      <div className='flex items-center '>
         <Image
-          className='hidden md:inline'
+          className={`hidden md:inline ${helmetImage || 'mr-2'}`}
           alt={'Driver Image'}
-          {...settings}
+          {...imageProperties}
         />
         <span className='text-4xl font-semibold'>{driver.name}</span>
       </div>
