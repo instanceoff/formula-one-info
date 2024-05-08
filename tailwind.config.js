@@ -15,6 +15,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      padding: {
+        '1/2': '50%',
+      },
       backgroundImage: {
         diagonalLines:
           'repeating-linear-gradient( 45deg, rgba(255,255,255, 0.1), rgba(255,255,255, 0.1) 2px, transparent 2px, transparent 6px )',
