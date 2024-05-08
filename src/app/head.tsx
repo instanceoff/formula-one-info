@@ -1,4 +1,4 @@
-export default async function Head() {
+export default function Head() {
   return (
     <>
       <title title='Formula 1' />

@@ -8,31 +8,32 @@ interface PositionProps {
 
 const Position = ({ driver }: PositionProps) => {
   const driverTeamColor = 'to-' + TeamsColors.get(driver.team.id);
-  const helmetImageUrl = getDriverHelmetImage(driver.driver.name.split(' ')[1]);
+  const driverLastName = driver.driver.name.split(' ')[1];
+  const helmetImageUrl = getDriverHelmetImage(driverLastName);
 
-  const pointsColors: { [position: number]: string } = {
-    1: 'bg-firstPlace',
-    2: 'bg-secondPlace',
-    3: 'bg-thirdPlace',
-  };
+  const pointsColors = new Map([
+    [1, 'bg-firstPlace'],
+    [2, 'bg-secondPlace'],
+    [3, 'bg-thirdPlace'],
+  ]);
+
+  const pointsColor = pointsColors.get(driver.position) || 'bg-place';
 
   return (
     <>
-      <div className='flex text-[#F2F2F2] w-full h-full items-center justify-center'>
+      <div className='flex text-gray-200  items-center justify-center'>
         <div
           className={`flex bg-diagonalLines justify-between items-center w-full rounded-bl-[550px] rounded-tr-[999px] -z-20`}
         >
           <div
-            className={`flex justify-between items-center w-full rounded-bl-[550px] rounded-tr-[999px] -z-20 bg-gradient-to-r from-transparent ${driverTeamColor}`}
+            className={`flex w-full justify-between rounded-tr-full bg-gradient-to-r from-transparent ${driverTeamColor}`}
           >
             <div className='flex'>
               <div
-                className={`flex w-36 mr-4 justify-between rounded-r-[999px] rounded-bl-[800px] ${
-                  pointsColors[driver.position] || 'bg-[#f2f2f2]'
-                }`}
+                className={`flex w-36 mr-4 justify-between rounded-r-[999px] rounded-bl-[800px] ${pointsColor}`}
               >
-                <div className='flex flex-col text-black  w-16 h-16 rounded-full rounded-tl-none outline outline-[#060616] outline-3'>
-                  <span className='absolute z-10 px-[0.12rem] text-xs font-bold'>
+                <div className='flex flex-col text-mainAccent  w-16 h-16 rounded-full rounded-tl-none outline outline-mainAccent outline-3'>
+                  <span className='absolute z-10 px-0.5 text-xs font-bold'>
                     PTS
                   </span>
                   <span className='m-auto text-2xl font-semibold'>

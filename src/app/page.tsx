@@ -15,9 +15,6 @@ const Page = async () => {
 
   return (
     <>
-      <Head>
-        <title>Current season ranking</title>
-      </Head>
       <Suspense fallback={<Loading />}>
         <LastWinner driver={driver} race={race} />
         {(responses && <Standings drivers={drivers} />) || (
