@@ -16,12 +16,12 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'www.f1fantasytracker.com',
+        hostname: 'media.formula1.com',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'media.formula1.com',
+        hostname: 'res.cloudinary.com',
         pathname: '/**',
       },
     ],

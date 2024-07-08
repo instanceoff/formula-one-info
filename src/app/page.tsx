@@ -3,7 +3,6 @@ import Standings from '@components/standings';
 import LastWinner from '@components/winner';
 import { getRankingBySeason, getLastWin } from '@utils/formulaRequests';
 import Loading from './loading';
-import Head from 'next/head';
 
 const Page = async () => {
   const driversRes = getRankingBySeason();

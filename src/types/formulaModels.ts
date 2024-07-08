@@ -24,7 +24,7 @@ export interface ITeam {
   logo: string;
 }
 
-export interface IRankingRace {
+export interface IRankingDriverInRace {
   race: { id: number };
   driver: {
     id: number;
@@ -115,20 +115,7 @@ export interface IMongoDataType<ResponseType> {
   data: ResponseType[];
 }
 
-export enum ETeamsColors {
-  'f1' = '#3671C6',
-  'f2' = '#F58020',
-  'f3' = '#F91536',
-  'f5' = '#6CD3BF',
-  'f13' = '#6CD3BF',
-  'f18' = '#C92D4B',
-  'f12' = '#37BEDD',
-  'f14' = '#B6BABD',
-  'f7' = '#5E8FAA',
-  'f17' = '#358C75',
-}
-
-export const TeamsColors = new Map([
+export const TeamNames = new Map([
   [1, 'RedBull'],
   [2, 'McLaren'],
   [3, 'Ferrari'],

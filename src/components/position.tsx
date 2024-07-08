@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { IRankingDriver, TeamsColors } from '../types/formulaModels';
-import { getDriverHelmetImage } from '@utils/formulaRequests';
+import { IRankingDriver, TeamNames } from '../types/formulaModels';
+import { getDriverHelmetImage, getTeamCarImage } from '@utils/formulaRequests';
 import { use } from 'react';
 interface PositionProps {
   driver: IRankingDriver;
@@ -9,7 +9,8 @@ interface PositionProps {
 const Position = ({
   driver: { driver, team, points, position },
 }: PositionProps) => {
-  const teamColor = TeamsColors.get(team.id);
+  const teamColor = TeamNames.get(team.id);
+
   const DriverResults = () => {
     const pointsColors = new Map([
       [1, 'bg-firstPlace'],
@@ -38,37 +39,46 @@ const Position = ({
   const DriverInfo = () => {
     const lastName = driver.name.split(' ')[1];
     const helmetImage = use(getDriverHelmetImage(lastName));
-    const imageProperties = helmetImage
+    const helmetImageProperties = helmetImage
       ? {
           src: helmetImage,
           width: 92,
           height: 90,
         }
       : { src: driver.image, width: 62, height: 60 };
+
     return (
       <div className='flex items-center '>
         <Image
           className={`hidden md:inline ${helmetImage || 'mr-2'}`}
           alt={'Driver Image'}
-          {...imageProperties}
+          {...helmetImageProperties}
         />
         <span className='text-4xl font-semibold'>{driver.name}</span>
       </div>
     );
   };
 
-  const DriverTeamInfo = () => (
-    <div className='flex items-center'>
-      <span className='text-2xl hidden xl:inline'>{team.name}</span>
-      <Image
-        className='hidden md:inline'
-        src={`/images/car${team.id}.png`}
-        alt={''}
-        width='250'
-        height='0'
-      />
-    </div>
-  );
+  const DriverTeamInfo = () => {
+    const carImage = use(getTeamCarImage(team.name));
+
+    return (
+      <>
+        <div className='flex items-center'>
+          <span className='text-2xl hidden xl:inline'>{team.name}</span>
+          {carImage && (
+            <Image
+              className='hidden md:inline max-h-20'
+              src={carImage}
+              alt={''}
+              width='270'
+              height='0'
+            />
+          )}
+        </div>
+      </>
+    );
+  };
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { IDriver, TeamsColors } from '../types/formulaModels';
+import { IDriver, TeamNames } from '../types/formulaModels';
 import Image from 'next/image';
 import * as Icons from '@utils/iconsLIb';
 import { Suspense, use } from 'react';
@@ -19,7 +19,7 @@ const DriverDropdown: React.FC<DriverDropdownProps> = async ({ driverID }) => {
 
   const lineColorStyle = {
     backgroundImage: `linear-gradient(90deg, rgba(255, 255, 255, 0) 10%, ${
-      TeamsColors.get(driver.teams[0].team.id) || 'rgba(255, 255, 255, 0)'
+      TeamNames.get(driver.teams[0].team.id) || 'rgba(255, 255, 255, 0)'
     } )`,
   };
 

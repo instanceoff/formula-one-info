@@ -3,17 +3,19 @@ import {
   IRespond,
   IRace,
   IDriver,
-  IRankingRace,
+  IRankingDriverInRace,
 } from '../types/formulaModels';
 
-const helmetRequest = `https://media.formula1.com/image/upload/content/dam/fom-website/manual/Helmets${new Date().getFullYear()}`;
-const myHeaders = new Headers();
+const formulaSiteUrl = `https://media.formula1.com/image/upload/content/dam/fom-website/`;
+const helmetRequest = `${formulaSiteUrl}manual/Helmets${new Date().getFullYear()}`;
+const carRequest = `${formulaSiteUrl}teams/${new Date().getFullYear()}`;
 const requestBase = 'https://v1.formula-1.api-sports.io/';
 
-myHeaders.append('x-rapidapi-key', process.env.NEXT_PUBLIC_RAPIDAPI_KEY);
+const myHeaders = new Headers();
+myHeaders.append('x-rapidapi-key', process.env.RAPIDAPI_KEY!);
 myHeaders.append('x-rapidapi-host', 'v1.formula-1.api-sports.io');
 
-const requestOptions = {
+const requestOptions: RequestInit = {
   method: 'GET',
   headers: myHeaders,
   redirect: 'follow',
@@ -22,14 +24,27 @@ const requestOptions = {
   },
 };
 
+const sendGetRequestToApi = async (
+  request: string,
+  additionalReuqestOptions?: Partial<RequestInit>
+) => {
+  return fetch(`${requestBase}${request}`, {
+    ...requestOptions,
+    ...additionalReuqestOptions,
+  });
+};
+
 export const getRankingBySeason = async (year?: string) => {
   const date = new Date();
-  const curYear = year ?? date.getFullYear();
+  const currentYear = date.getFullYear();
+  const seasonYear = year ?? currentYear;
 
-  const res = await fetch(
-    `${requestBase}rankings/drivers?season=${curYear}`,
-    requestOptions as RequestInit
-  );
+  // const res = await fetch(
+  //   `${requestBase}rankings/drivers?season=${seasonYear}`,
+  //   requestOptions
+  // );
+  const requestBody = `rankings/drivers?season=${seasonYear}`;
+  const res = await sendGetRequestToApi(requestBody);
 
   const resp: IRespond<IRankingDriver> = await res.json();
   const drivers: IRankingDriver[] = resp.response;
@@ -38,29 +53,30 @@ export const getRankingBySeason = async (year?: string) => {
 };
 
 export const getSeasons = async () => {
-  const res = await fetch(
-    `${requestBase}seasons`,
-    requestOptions as RequestInit
-  );
+  // const res = await fetch(`${requestBase}seasons`, requestOptions);
 
+  const requestBody = `seasons`;
+  const res = await sendGetRequestToApi(requestBody);
   const resp: IRespond<number> = await res.json();
   const drivers: number[] = resp.response;
 
   return drivers;
 };
 
-export const convertToVaariants = (input: string[], baseLink: string) => {
+export const convertToVariants = (input: string[], baseLink: string) => {
   return input.map((inp) => {
     return { name: inp, link: baseLink + inp };
   });
 };
 
 export const getLastRace = async () => {
-  const res = await fetch(
-    `${requestBase}races?last=1&type=race`,
-    requestOptions as RequestInit
-  );
+  // const res = await fetch(
+  //   `${requestBase}races?last=1&type=race`,
+  //   requestOptions
+  // );
 
+  const requestBody = `races?last=1&type=race`;
+  const res = await sendGetRequestToApi(requestBody);
   const resp: IRespond<IRace> = await res.json();
   const race: IRace = resp.response[0];
 
@@ -72,33 +88,43 @@ export const getLastWin = async () => {
 
   const raceID = race && race.id;
 
-  const res = await fetch(
-    `${requestBase}rankings/races?race=${raceID}`,
-    requestOptions as RequestInit
-  );
+  // const res = await fetch(
+  //   `${requestBase}rankings/races?race=${raceID}`,
+  //   requestOptions
+  // );
 
-  const resp: IRespond<IRankingRace> = await res.json();
-  const driver: IRankingRace = resp.response[0];
+  const requestBody = `rankings/races?race=${raceID}`;
+  const res = await sendGetRequestToApi(requestBody);
+
+  const resp: IRespond<IRankingDriverInRace> = await res.json();
+  const driver: IRankingDriverInRace = resp.response[0];
 
   return { driver, race };
 };
 
 export const getDriverHelmetImage = async (driverLastName: string) => {
-  const res = await fetch(
-    `${helmetRequest}/${driverLastName.toLocaleLowerCase()}`,
-    requestOptions as RequestInit
-  );
-  return res.status !== 404
-    ? `${helmetRequest}/${driverLastName.toLocaleLowerCase()}`
-    : null;
+  const formattedLastName = driverLastName.toLocaleLowerCase();
+  const reqUrl = `${helmetRequest}/${formattedLastName}`;
+
+  const res = await fetch(reqUrl, requestOptions);
+
+  return res.status !== 404 ? reqUrl : null;
+};
+
+export const getTeamCarImage = async (teamName: string) => {
+  const formattedTeamName = teamName.toLocaleLowerCase().split(' ').join('-');
+  const reqUrl = `${carRequest}/${formattedTeamName}`;
+
+  const res = await fetch(reqUrl, requestOptions);
+
+  return res.status !== 404 ? reqUrl : null;
 };
 
 export const getDriver = async (id: number) => {
-  const res = await fetch(
-    `${requestBase}drivers?id=${id}`,
-    requestOptions as RequestInit
-  );
+  // const res = await fetch(`${requestBase}drivers?id=${id}`, requestOptions);
 
+  const requestBody = `drivers?id=${id}`;
+  const res = await sendGetRequestToApi(requestBody);
   const resp: IRespond<IDriver> = await res.json();
   const driver: IDriver = resp.response[0];
 
