@@ -8,14 +8,16 @@ const Page = async () => {
   const driversRes = getRankingBySeason();
   const lastWinRes = getLastWin();
 
-  const responses = await Promise.all([driversRes, lastWinRes]);
+  // const responses = await Promise.all([driversRes, lastWinRes]);
+  const responses = await Promise.all([driversRes]);
 
-  const [drivers, { driver, race }] = responses;
+  // const [drivers, { driver, race }] = responses;
+  const [drivers] = responses;
 
   return (
     <>
       <Suspense fallback={<Loading />}>
-        <LastWinner driver={driver} race={race} />
+        {/* <LastWinner driver={driver} race={race} /> */}
         {(responses && <Standings drivers={drivers} />) || (
           <div className='m-auto w-full h-full'>
             <h1 className='w-fit m-auto text-6xl'>
