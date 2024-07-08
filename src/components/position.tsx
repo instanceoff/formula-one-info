@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import { IRankingDriver, TeamNames } from '../types/formulaModels';
+import { IRankingDriver, TeamNamesForImage } from '../types/formulaModels';
 import { getDriverHelmetImage, getTeamCarImage } from '@utils/formulaRequests';
 import { use } from 'react';
+import plainHelmet from '../../public/plain-helmet.svg';
 interface PositionProps {
   driver: IRankingDriver;
 }
@@ -9,7 +10,7 @@ interface PositionProps {
 const Position = ({
   driver: { driver, team, points, position },
 }: PositionProps) => {
-  const teamColor = TeamNames.get(team.id);
+  const teamColor = team.id;
 
   const DriverResults = () => {
     const pointsColors = new Map([
@@ -18,7 +19,6 @@ const Position = ({
       [3, 'bg-thirdPlace'],
     ]);
     const pointsColor = pointsColors.get(position) || 'bg-place';
-
     return (
       <div
         className={`flex w-36 mr-4 md:mr-0 rounded-r-full rounded-bl-full ${pointsColor}`}
@@ -45,12 +45,14 @@ const Position = ({
           width: 92,
           height: 90,
         }
-      : { src: driver.image, width: 62, height: 60 };
+      : { src: plainHelmet, width: 62, height: 60 };
 
     return (
-      <div className='flex items-center '>
+      <div className='flex items-center'>
         <Image
-          className={`hidden md:inline ${helmetImage || 'mr-2'}`}
+          className={`hidden md:inline ${
+            helmetImage || 'mr-2'
+          } lg:max-h-full max-h-8`}
           alt={'Driver Image'}
           {...helmetImageProperties}
         />
@@ -60,18 +62,19 @@ const Position = ({
   };
 
   const DriverTeamInfo = () => {
-    const carImage = use(getTeamCarImage(team.name));
+    const teamName = TeamNamesForImage.get(team.id);
+    const image = teamName ? use(getTeamCarImage(teamName)) : team.logo;
 
     return (
       <>
-        <div className='flex items-center'>
+        <div className='flex items-center mr-4'>
           <span className='text-2xl hidden xl:inline'>{team.name}</span>
-          {carImage && (
+          {image && (
             <Image
-              className='hidden md:inline max-h-20'
-              src={carImage}
+              className='hidden md:inline'
+              src={image}
               alt={''}
-              width='270'
+              width='170'
               height='0'
             />
           )}
@@ -86,7 +89,7 @@ const Position = ({
         className={`text-gray-200 bg-diagonalLines rounded-bl-full rounded-tr-full`}
       >
         <div
-          className={`flex w-full rounded-tr-full bg-gradient-to-r from-transparent to-${teamColor}`}
+          className={`flex w-full rounded-tr-full bg-gradient-to-r from-transparent to-formula-${teamColor}`}
         >
           <DriverResults />
           <div className='flex w-full justify-between'>

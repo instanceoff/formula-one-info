@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { CSSProperties } from 'react';
-import { IRankingDriverInRace, IRace, TeamNames } from '../types/formulaModels';
+import { IRankingDriverInRace, IRace } from '../types/formulaModels';
 
 interface LastWinnerProps {
   driver: IRankingDriverInRace;
@@ -15,7 +15,7 @@ const LastWinner: React.FC<LastWinnerProps> = ({
     backgroundImage: 'url("/images/brazil.svg")',
   };
 
-  const textWithTeamColor = 'text-' + TeamNames.get(team.id);
+  const textWithTeamColor = 'text-' + team.id;
 
   return (
     <>

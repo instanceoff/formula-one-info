@@ -115,15 +115,17 @@ export interface IMongoDataType<ResponseType> {
   data: ResponseType[];
 }
 
-export const TeamNames = new Map([
-  [1, 'RedBull'],
+export const TeamIds = [1, 2, 3, 5, 13, 8, 12, 14, 7, 17];
+
+export const TeamNamesForImage = new Map([
+  [1, 'Red Bull Racing'],
   [2, 'McLaren'],
   [3, 'Ferrari'],
   [5, 'Mercedes'],
   [13, 'Alpine'],
-  [18, 'Stake'],
+  [8, 'Kick Sauber'],
   [12, 'Williams'],
   [14, 'Haas'],
   [7, 'RB'],
-  [17, 'AstonMartin'],
+  [17, 'Aston Martin'],
 ]);

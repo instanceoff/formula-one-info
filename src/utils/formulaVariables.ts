@@ -4,7 +4,7 @@ export const teamNames = [
   'Ferrari',
   'Mercedes',
   'Alpine',
-  'Stake',
+  'KickSauber',
   'Williams',
   'Haas',
   'RB',

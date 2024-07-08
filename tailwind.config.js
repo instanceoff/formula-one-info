@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import { teamNames } from './src/utils/formulaVariables';
+import { TeamIds } from './src/types/formulaModels';
 
 module.exports = {
   content: [
@@ -7,10 +7,10 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx}',
   ],
   safelist: [
-    ...teamNames.flatMap((team) => [
-      `to-${team}`,
-      `bg-${team}`,
-      `text-${team}`,
+    ...TeamIds.flatMap((teamId) => [
+      `to-formula-${teamId}`,
+      `bg-formula-${teamId}`,
+      `text-formula-${teamId}`,
     ]),
   ],
   theme: {
@@ -24,16 +24,18 @@ module.exports = {
       },
       colors: {
         mainAccent: '#060616',
-        RedBull: '#3671C6',
-        McLaren: '#F58020',
-        Ferrari: '#F91536',
-        Mercedes: '#6CD3BF',
-        Alpine: '#6CD3BF',
-        Stake: '#C92D4B',
-        Williams: '#37BEDD',
-        Haas: '#B6BABD',
-        RB: '#5E8FAA',
-        AstonMartin: '#358C75',
+        formula: {
+          1: '#3671C6',
+          2: '#F58020',
+          3: '#F91536',
+          5: '#6CD3BF',
+          13: '#6CD3BF',
+          8: '#C92D4B',
+          12: '#37BEDD',
+          14: '#B6BABD',
+          7: '#5E8FAA',
+          17: '#358C75',
+        },
         firstPlace: '#F8D31E',
         secondPlace: '#d3d3d3',
         thirdPlace: '#e88109',
