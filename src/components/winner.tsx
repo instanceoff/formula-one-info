@@ -15,7 +15,7 @@ const LastWinner: React.FC<LastWinnerProps> = ({
     backgroundImage: 'url("/images/brazil.svg")',
   };
 
-  const textWithTeamColor = 'text-' + team.id;
+  const textWithTeamColor = 'text-formula-' + team.id;
 
   return (
     <>
@@ -26,17 +26,17 @@ const LastWinner: React.FC<LastWinnerProps> = ({
               <Image
                 className=''
                 src={`https://res.cloudinary.com/f1-tracker/image/upload/f_auto/v1618736029/FullBody/${
-                  driver.name!.split(' ')[1]
+                  driver.name.split(' ')[1]
                 }Full.png`}
                 alt={''}
-                width={350}
+                width={385}
                 height={385}
               />
               <span className='absolute text-5xl justify-self-end p-2 mb-2 bg-[#060616] bg-opacity-80 rounded-2xl'>
-                {driver.name!.split(' ')[0]}
+                {driver.name.split(' ')[0]}
                 <br />
                 <span className={`text-7xl font-semibold ${textWithTeamColor}`}>
-                  {driver.name!.split(' ')[1]}
+                  {driver.name.split(' ')[1]}
                 </span>
               </span>
             </div>
