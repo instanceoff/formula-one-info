@@ -1,4 +1,4 @@
-import { IDriver, TeamNames } from '../types/formulaModels';
+import { IDriver } from '../types/formulaModels';
 import Image from 'next/image';
 import * as Icons from '@utils/iconsLIb';
 import { Suspense, use } from 'react';
@@ -17,11 +17,11 @@ const DriverDropdown: React.FC<DriverDropdownProps> = async ({ driverID }) => {
       'repeating-linear-gradient( 45deg, rgba(255,255,255, 0.1), rgba(255,255,255, 0.1) 2px, transparent 2px, transparent 6px )',
   };
 
-  const lineColorStyle = {
-    backgroundImage: `linear-gradient(90deg, rgba(255, 255, 255, 0) 10%, ${
-      TeamNames.get(driver.teams[0].team.id) || 'rgba(255, 255, 255, 0)'
-    } )`,
-  };
+  // const lineColorStyle = {
+  //   backgroundImage: `linear-gradient(90deg, rgba(255, 255, 255, 0) 10%, ${
+  //     TeamNames.get(driver.teams[0].team.id) || 'rgba(255, 255, 255, 0)'
+  //   } )`,
+  // };
 
   const borderStyle = {
     borderImage:
@@ -31,7 +31,7 @@ const DriverDropdown: React.FC<DriverDropdownProps> = async ({ driverID }) => {
   return (
     <>
       <div className='max-w-7xl max-h-72 mx-auto' style={backStyle}>
-        <div className='' style={lineColorStyle}>
+        <div className=''>
           <div className='flex flex-row px-5'>
             <div className='mr-14'>
               <Image
