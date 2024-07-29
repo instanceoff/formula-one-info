@@ -26,8 +26,8 @@ const Header: React.FC<HeaderProps> = () => {
             <Link className='text-[#F8D31E]' href={'/'}>
               STANDING
             </Link>
-            <Link href={'/drivers'}>DRIVERS</Link>
-            <Link href={'/teams'}>TEAMS</Link>
+            {/* <Link href={'/drivers'}>DRIVERS</Link>
+            <Link href={'/teams'}>TEAMS</Link> */}
           </nav>
         </div>
       </div>

@@ -12,7 +12,7 @@ const carRequest = `${formulaSiteUrl}teams/${new Date().getFullYear()}`;
 const requestBase = 'https://v1.formula-1.api-sports.io/';
 
 const myHeaders = new Headers();
-myHeaders.append('x-rapidapi-key', process.env.RAPIDAPI_KEY!);
+myHeaders.append('x-rapidapi-key', process.env.RAPIDAPI_KEY);
 myHeaders.append('x-rapidapi-host', 'v1.formula-1.api-sports.io');
 
 const requestOptions: RequestInit = {
