@@ -3,8 +3,6 @@ import Standings from '@components/standings';
 import { getRankingBySeason } from '@utils/formulaRequests';
 import Loading from '../../../loading';
 
-interface RankingsDriversProps {}
-
 const RankingsDrivers = async ({ params }: { params: { season: string } }) => {
   const drivers = await getRankingBySeason(params.season);
 

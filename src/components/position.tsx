@@ -1,100 +1,98 @@
 import Image from 'next/image';
-import { CSSProperties } from 'react';
-import { IRankingDriver, TeamsColors } from '../types/formulaModels';
+import { IRankingDriver, TeamNamesForImage } from '../types/formulaModels';
+import { getDriverHelmetImage, getTeamCarImage } from '@utils/formulaRequests';
+import { use } from 'react';
+import plainHelmet from '../../public/plain-helmet.svg';
 interface PositionProps {
   driver: IRankingDriver;
 }
 
-const Position: React.FC<PositionProps> = ({ driver }) => {
-  const lineColorStyle: CSSProperties = {
-    backgroundImage:
-      'linear-gradient(90deg, rgba(255, 255, 255, 0) 10%,' +
-      TeamsColors.get(driver.team.id!) +
-      ')',
+const Position = ({
+  driver: { driver, team, points, position },
+}: PositionProps) => {
+  const teamColor = team.id;
+
+  const DriverResults = () => {
+    const pointsColors = new Map([
+      [1, 'bg-firstPlace'],
+      [2, 'bg-secondPlace'],
+      [3, 'bg-thirdPlace'],
+    ]);
+    const pointsColor = pointsColors.get(position) || 'bg-place';
+    return (
+      <div
+        className={`flex w-36 mr-4 md:mr-0 rounded-r-full rounded-bl-full ${pointsColor}`}
+      >
+        <div className='relative w-1/2 pb-1/2 text-mainAccent rounded-full rounded-tl-none outline outline-mainAccent outline-3'>
+          <div className='absolute flex px-0.5 w-full h-full'>
+            <span className='absolute text-xs font-bold'>PTS</span>
+            <span className='m-auto text-2xl font-semibold'>{points || 0}</span>
+          </div>
+        </div>
+        <span className='m-auto pl-2 pr-4 text-white text-5xl font-bold text-stroke-2'>
+          {position}
+        </span>
+      </div>
+    );
   };
 
-  const pointsColorStyle = {
-    backgroundColor: `${
-      (driver.position == 1 && '#F8D31E') ||
-      (driver.position == 2 && '#d3d3d3') ||
-      (driver.position == 3 && '#e88109') ||
-      '#f2f2f2'
-    }`,
+  const DriverInfo = () => {
+    const lastName = driver.name.split(' ')[1];
+    const helmetImage = use(getDriverHelmetImage(lastName));
+    const helmetImageProperties = helmetImage
+      ? {
+          src: helmetImage,
+          width: 92,
+          height: 90,
+        }
+      : { src: plainHelmet, height: 45 };
+
+    return (
+      <div className='flex items-center'>
+        <Image
+          className={`hidden md:inline ${helmetImage || 'mx-4'}  max-h-full`}
+          alt={'Driver Image'}
+          {...helmetImageProperties}
+        />
+        <span className='text-4xl font-semibold'>{driver.name}</span>
+      </div>
+    );
   };
 
-  const backStyle = {
-    opacity: 1,
-    backgroundImage:
-      'repeating-linear-gradient( 45deg, rgba(255,255,255, 0.1), rgba(255,255,255, 0.1) 2px, transparent 2px, transparent 6px )',
-  };
+  const DriverTeamInfo = () => {
+    const teamName = TeamNamesForImage.get(team.id);
+    const image = teamName ? use(getTeamCarImage(teamName)) : team.logo;
 
-  const helmetImage = `/images/helmet${driver.driver.id}.png`;
+    return (
+      <>
+        <div className='flex items-center mr-4'>
+          <span className='text-2xl hidden xl:inline'>{team.name}</span>
+          {image && (
+            <Image
+              className='hidden md:inline'
+              src={image}
+              alt={''}
+              width='170'
+              height='0'
+            />
+          )}
+        </div>
+      </>
+    );
+  };
 
   return (
     <>
-      <div className='flex text-[#F2F2F2] w-full h-full items-center justify-center'>
+      <div
+        className={`text-gray-200 bg-diagonalLines rounded-bl-full rounded-tr-full`}
+      >
         <div
-          className={`flex justify-between items-center w-full rounded-bl-[550px] rounded-tr-[999px] -z-20`}
-          style={backStyle}
+          className={`flex w-full rounded-tr-full bg-gradient-to-r from-transparent to-formula-${teamColor}`}
         >
-          <div
-            style={lineColorStyle}
-            className={`flex testik justify-between items-center w-full rounded-bl-[550px] rounded-tr-[999px] -z-20`}
-          >
-            <div className='flex'>
-              <div
-                className='flex w-36 mr-4 justify-between rounded-r-[999px] rounded-bl-[800px]'
-                style={pointsColorStyle}
-              >
-                <div className='flex flex-col text-black  w-16 h-16 rounded-full rounded-tl-none outline outline-[#060616] outline-3'>
-                  <span className='absolute z-10 px-[0.12rem] text-xs font-bold'>
-                    PTS
-                  </span>
-                  <span className='m-auto text-2xl font-semibold'>
-                    {driver.points || 0}
-                  </span>
-                </div>
-                <div className='flex mx-auto rounded-r-full items-center justify-center h-16 text-4xl'>
-                  <span className='mx-auto pt-1 text-white text-5xl font-bold text-stroke-2'>
-                    {driver.position}
-                  </span>
-                </div>
-              </div>
-              <div className='flex items-center'>
-                {(
-                  <Image
-                    className='mr-4 overflow-hidden hidden md:inline '
-                    src={helmetImage}
-                    alt={'Helmet'}
-                    width='62'
-                    height='60'
-                  />
-                ) || (
-                  <Image
-                    className='mr-4 overflow-hidden hidden md:inline '
-                    src={driver.driver.image}
-                    alt={'Helmet'}
-                    width='62'
-                    height='60'
-                  />
-                )}
-                <span className='text-4xl font-semibold'>
-                  {driver.driver.name}
-                </span>
-              </div>
-            </div>
-            <div className='flex items-center'>
-              <span className='text-2xl hidden xl:inline'>
-                {driver.team.name}
-              </span>
-              <Image
-                className='hidden md:inline'
-                src={`/images/car${driver.team.id}.png`}
-                alt={''}
-                width='250'
-                height='0'
-              />
-            </div>
+          <DriverResults />
+          <div className='flex w-full justify-between'>
+            <DriverInfo />
+            <DriverTeamInfo />
           </div>
         </div>
       </div>

@@ -1,8 +1,4 @@
-import { Suspense } from 'react';
 import { IRankingDriver } from '../types/formulaModels';
-import DriverDropdown from './driverDropdown';
-import DirverDropdown from './driverDropdown';
-import Dropdown, { DropdownButton, DropdownContent } from './dropdown';
 import Position from './position';
 
 interface StandingsProps {
@@ -23,16 +19,3 @@ const Standings: React.FC<StandingsProps> = ({ drivers }) => {
 };
 
 export default Standings;
-
-{
-  /* <Dropdown key={driver.driver.id}>
-<DropdownButton>
-  <Position driver={driver} />
-</DropdownButton>
-<DropdownContent>
-  <DriverDropdown
-    driverID={driver.driver.id}
-  />
-</DropdownContent>
-</Dropdown> */
-}
