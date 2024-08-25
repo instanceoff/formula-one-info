@@ -20,7 +20,7 @@ const requestOptions: RequestInit = {
   headers: myHeaders,
   redirect: 'follow',
   next: {
-    revalidate: 86400,
+    revalidate: 86400, // Revalidates once a day
   },
 };
 
@@ -38,11 +38,6 @@ export const getRankingBySeason = async (year?: string) => {
   const date = new Date();
   const currentYear = date.getFullYear();
   const seasonYear = year ?? currentYear;
-
-  // const res = await fetch(
-  //   `${requestBase}rankings/drivers?season=${seasonYear}`,
-  //   requestOptions
-  // );
   const requestBody = `rankings/drivers?season=${seasonYear}`;
   const res = await sendGetRequestToApi(requestBody);
 
@@ -53,46 +48,29 @@ export const getRankingBySeason = async (year?: string) => {
 };
 
 export const getSeasons = async () => {
-  // const res = await fetch(`${requestBase}seasons`, requestOptions);
-
   const requestBody = `seasons`;
   const res = await sendGetRequestToApi(requestBody);
+
   const resp: IRespond<number> = await res.json();
   const drivers: number[] = resp.response;
 
   return drivers;
 };
 
-export const convertToVariants = (input: string[], baseLink: string) => {
-  return input.map((inp) => {
-    return { name: inp, link: baseLink + inp };
-  });
-};
-
-export const getLastRace = async () => {
-  // const res = await fetch(
-  //   `${requestBase}races?last=1&type=race`,
-  //   requestOptions
-  // );
-
-  const requestBody = `races?last=1&type=race`;
+export const getLastCompletedRace = async () => {
+  const requestBody = `races?last=2&type=race`;
   const res = await sendGetRequestToApi(requestBody);
-  const resp: IRespond<IRace> = await res.json();
-  const race: IRace = resp.response[0];
 
-  return race;
+  const resp: IRespond<IRace> = await res.json();
+  const races: IRace[] = resp.response;
+  const isLastRaceCompleted = races[0].status === 'Completed';
+
+  return isLastRaceCompleted ? races[0] : races[1];
 };
 
 export const getLastWin = async () => {
-  const race = await getLastRace();
-
+  const race = await getLastCompletedRace();
   const raceID = race && race.id;
-
-  // const res = await fetch(
-  //   `${requestBase}rankings/races?race=${raceID}`,
-  //   requestOptions
-  // );
-
   const requestBody = `rankings/races?race=${raceID}`;
   const res = await sendGetRequestToApi(requestBody);
 
@@ -121,10 +99,9 @@ export const getTeamCarImage = async (teamName: string) => {
 };
 
 export const getDriver = async (id: number) => {
-  // const res = await fetch(`${requestBase}drivers?id=${id}`, requestOptions);
-
   const requestBody = `drivers?id=${id}`;
   const res = await sendGetRequestToApi(requestBody);
+
   const resp: IRespond<IDriver> = await res.json();
   const driver: IDriver = resp.response[0];
 

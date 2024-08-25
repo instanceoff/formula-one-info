@@ -1,7 +1,5 @@
-import { IDriver } from '../types/formulaModels';
 import Image from 'next/image';
 import * as Icons from '@utils/iconsLIb';
-import { Suspense, use } from 'react';
 import { getDriver } from '@utils/formulaRequests';
 
 interface DriverDropdownProps {

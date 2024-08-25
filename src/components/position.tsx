@@ -29,7 +29,7 @@ const Position = ({
             <span className='m-auto text-2xl font-semibold'>{points || 0}</span>
           </div>
         </div>
-        <span className='m-auto text-white text-5xl font-bold text-stroke-2'>
+        <span className='m-auto pl-2 pr-4 text-white text-5xl font-bold text-stroke-2'>
           {position}
         </span>
       </div>
@@ -45,14 +45,12 @@ const Position = ({
           width: 92,
           height: 90,
         }
-      : { src: plainHelmet, width: 62, height: 60 };
+      : { src: plainHelmet, height: 45 };
 
     return (
       <div className='flex items-center'>
         <Image
-          className={`hidden md:inline ${
-            helmetImage || 'mr-2'
-          } lg:max-h-full max-h-8`}
+          className={`hidden md:inline ${helmetImage || 'mx-4'}  max-h-full`}
           alt={'Driver Image'}
           {...helmetImageProperties}
         />
